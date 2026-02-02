@@ -10,6 +10,12 @@ pre-commit:
       run: bun run lint
       stage_fixed: true
 
+commit-msg:
+  commands:
+    commit-lint:
+      run: bash pre-commit.sh {1}
+      fail_text: Commit message does not follow Conventional Commits style.
+
 pre-push:
   jobs:
     - name: check fmt

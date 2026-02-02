@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": [
+    "dist/**",
+    "node_modules/**",
+    ".oxlintrc.json",
+    "README.md",
+    "package.json",
+    "global.css",
+    "devcontainer.json",
+    "deploy.yaml",
+    "extensions.json",
+    ".oxfmtrc.json",
+    "tsconfig.json",
+    "lefthook.yml",
+  ]
+}

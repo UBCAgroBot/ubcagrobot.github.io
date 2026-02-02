@@ -1,0 +1,47 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    container:
+      image: agrobotappliedai/webdev-containers:latest
+      options: --user root
+    environment: 
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write 
+      id-token: write
+
+    steps:
+      - name: Checkout Code
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Add bun to PATH
+        id: path
+        run: echo "/home/vscode/.bun/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        id: install
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        id: build
+        run: bun run build
+
+      - name: Upload files
+        id: upload
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+

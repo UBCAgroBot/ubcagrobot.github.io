@@ -1,0 +1,28 @@
+assert_lefthook_installed: true
+
+pre-commit:
+  jobs:
+    - name: format
+      run: bun run fmt
+      stage_fixed: true
+    
+    - name: lint
+      run: bun run lint
+      stage_fixed: true
+
+commit-msg:
+  commands:
+    commit-lint:
+      run: bash pre-commit.sh {1}
+      fail_text: Commit message does not follow Conventional Commits style.
+
+pre-push:
+  jobs:
+    - name: check fmt
+      run: bun run fmt:check
+
+    - name: check lint
+      run: bun run lint:check
+
+    - name: check build
+      run: bun run build:check

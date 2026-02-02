@@ -3,15 +3,10 @@
   "ignorePatterns": [
     "dist/**",
     "node_modules/**",
-    ".oxlintrc.json",
     "README.md",
-    "package.json",
     "global.css",
-    "devcontainer.json",
-    "deploy.yaml",
-    "extensions.json",
-    ".oxfmtrc.json",
-    "tsconfig.json",
-    "lefthook.yml",
+    "*.yaml",
+    "*.yml",
+    "*.json"
   ]
 }

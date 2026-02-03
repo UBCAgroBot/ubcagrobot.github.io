@@ -40,7 +40,6 @@
     "dist/**",
     "node_modules/**",
     "README.md",
-    "global.css",
     "*.yaml",
     "*.yml",
     "*.json"

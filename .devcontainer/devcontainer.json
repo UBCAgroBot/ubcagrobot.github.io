@@ -1,20 +1,28 @@
 {
-    "name": "Webdev Container",
-    "remoteUser": "vscode",
-    "image": "agrobotappliedai/webdev-containers:latest",
-    "customizations": {
-        "settings": {
-            "terminal.integrated.shell.linux": "bash"
-        }
+  "name": "Webdev Container",
+  "remoteUser": "vscode",
+  "image": "agrobotappliedai/webdev-containers:latest",
+  "customizations": {
+    "settings": {
+      "terminal.integrated.shell.linux": "bash"
     },
-    "workspaceFolder": "/home/vscode/workspace",
-    "workspaceMount": "source=.,target=/home/vscode/workspace,type=bind,consistency=cached",
-    "updateRemoteUserUID": false,
-    "mounts": [],
+    "vscode": {
+      "extensions": [
+        "oxc.oxc-vscode",
+        "astro-build.astro-vscode",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
+      ]
+    }
+  },
+  "workspaceFolder": "/home/vscode/workspace",
+  "workspaceMount": "source=.,target=/home/vscode/workspace,type=bind,consistency=cached",
+  "updateRemoteUserUID": false,
+  "mounts": [],
     "runArgs": [
         "--net=host",
         "-it",
         "--rm"
     ],
-    "postAttachCommand": "bun install --frozen-lockfile"
+  "postAttachCommand": "bun install --frozen-lockfile"
 }

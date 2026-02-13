@@ -2,12 +2,13 @@
 const { quote, author } = Astro.props;
 ---
 
-<div>
-  <p>
-    “I joined to learn about sensors, but I stayed because of the team. We all
-    share this goal of building something that could really help farmers one
-    day.”
+<!-- Testimonial Card -->
+<div class="testimonial-card">
+  <p class="testimonial-quote">
+    {quote}
   </p>
 
-  <p>Miguel Santos, Electrical Subteam</p>
+  <p class="testimonial-author">
+    {author}
+  </p>
 </div>

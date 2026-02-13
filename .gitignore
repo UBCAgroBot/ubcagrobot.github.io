@@ -1,3 +1,53 @@
+# =========================
+# dependencies
+# =========================
 node_modules/
+.bun/
+.bun-install-cache/
+
+# =========================
+# build output
+# =========================
 dist/
+.build/
 .astro/
+output/
+
+# =========================
+# environment files
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# logs
+# =========================
+npm-debug.log*
+yarn-debug.log*
+bun-debug.log*
+
+# =========================
+# OS junk
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# editor / local settings
+# =========================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# =========================
+# docker local overrides
+# =========================
+docker-compose.override.yml
+
+# =========================
+# temp
+# =========================
+*.tmp
+*.swp
+*.local

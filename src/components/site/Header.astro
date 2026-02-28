@@ -1,8 +1,4 @@
 ---
-/*
-  Navigation links for the header.
-  This makes it easy to add/remove pages later without editing HTML structure.
-*/
 const navLinks = [
   { label: "About", href: "/about" },
   { label: "Projects", href: "/projects" },
@@ -12,32 +8,37 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-/*
-  Get current page path from the browser URL.
-  Used to highlight the active navigation tab.
-*/
 const pathname = Astro.url.pathname;
 ---
 
-<!-- Header wrapper for entire navigation bar -->
-<header class="header">
-  <!-- Inner container to keep content centered and aligned -->
-  <div class="header-inner">
-    <!-- Logo + team name (left side) -->
-    <a class="brand" href="/" aria-label="UBC Agrobot Home">
-      <!-- Placeholder for logo image (replace later with real logo SVG/png) -->
-      <img src="/agrobot_logo.png" alt="UBC Agrobot logo" class="logo" />
-      <span class="brand-text">UBC Agrobot</span>
+<header class="sticky top-0 z-50 border-b border-black/10 bg-white">
+  <div
+    class="mx-auto flex max-w-[1200px] items-center justify-between gap-6 px-6 py-4"
+  >
+    <!-- Logo + Team Name -->
+    <a
+      href="/"
+      aria-label="UBC Agrobot Home"
+      class="inline-flex items-center gap-3 whitespace-nowrap"
+    >
+      <img
+        src="/agrobot_logo.png"
+        alt="UBC Agrobot logo"
+        class="block h-[30px] w-auto object-contain"
+      />
+      <span class="text-[18px] font-semibold tracking-wide"> UBC Agrobot </span>
     </a>
 
-    <!-- Main navigation menu -->
-    <nav class="nav" aria-label="Primary">
-      <!-- Loop through navLinks array and create buttons dynamically -->
+    <!-- Navigation -->
+    <nav
+      aria-label="Primary"
+      class="flex flex-wrap items-center justify-end gap-3"
+    >
       {
         navLinks.map((link) => (
           <a
-            class={`nav-pill ${pathname === link.href ? "is-active" : ""}`}
             href={link.href}
+            class={`inline-flex items-center justify-center rounded-full bg-black/10 px-5 py-2.5 font-medium text-black/90 transition-all duration-150 hover:-translate-y-0.5 hover:bg-black/15 ${pathname === link.href ? "bg-black/20" : ""} `}
           >
             {link.label}
           </a>
@@ -46,96 +47,3 @@ const pathname = Astro.url.pathname;
     </nav>
   </div>
 </header>
-
-<style>
-  /* Sticky top header */
-  .header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: #fff;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  }
-
-  /* Center content and control spacing */
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding: 18px 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  /* Logo + title section */
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    color: inherit;
-    white-space: nowrap;
-  }
-
-  /* Circular Agrobot logo */
-  .logo {
-    height: 30px; /* matches text height */
-    width: auto;
-    object-fit: contain;
-    display: block;
-  }
-
-  /* Team name text styling */
-  .brand-text {
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: 0.2px;
-  }
-
-  /* Navigation container */
-  .nav {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-
-  /* Navigation pill buttons */
-  .nav-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 18px;
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.1);
-    text-decoration: none;
-    color: rgba(0, 0, 0, 0.88);
-    font-weight: 500;
-    transition:
-      transform 120ms ease,
-      background 120ms ease;
-  }
-
-  .nav-pill:hover {
-    background: rgba(0, 0, 0, 0.14);
-    transform: translateY(-1px);
-  }
-
-  .nav-pill.is-active {
-    background: rgba(0, 0, 0, 0.18);
-  }
-
-  /* Mobile responsiveness */
-  @media (max-width: 820px) {
-    .header-inner {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .nav {
-      width: 100%;
-      justify-content: flex-start;
-    }
-  }
-</style>

@@ -1,0 +1,97 @@
+---
+/*
+Import the visual sub-components so the landing hero
+only handles layout + text content.
+*/
+import HeroRibbon from "../hero/HeroRibbon.astro";
+import HeroDashboard from "../hero/HeroDashboard.astro";
+
+/*
+Props allow this component to be reused with different text
+without modifying the layout or styling.
+*/
+const {
+  eyebrow = "UBC Agrobot",
+  title = "Robotics for agriculture",
+  subtitle = "We design and build field-ready systems. For perception, autonomy, and real-world deployment.",
+  primaryCta = { label: "Get involved", href: "/recruitment" },
+  secondaryCta = { label: "Explore projects", href: "/projects" },
+} = Astro.props;
+---
+
+<!--
+Hero section container.
+
+relative + isolate:
+Creates a local stacking context so the background, ribbon,
+and content layer in a predictable way.
+-->
+<section class="relative isolate">
+  <!-- Subtle page background -->
+  <div class="pointer-events-none absolute inset-0 -z-20">
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-white via-white to-slate-50"
+    >
+    </div>
+  </div>
+
+  <!-- Animated Stripe-style ribbon -->
+  <HeroRibbon />
+
+  <!-- Main content wrapper -->
+  <div class="mx-auto max-w-6xl px-6">
+    <!--
+    12-column responsive hero layout.
+
+    Left = text content
+    Right = product/dashboard mock
+    -->
+    <div
+      class="grid min-h-[calc(100vh-var(--header-height,5rem))] items-center gap-12 py-16 lg:grid-cols-12"
+    >
+      <!-- Left: hero messaging -->
+      <div class="lg:col-span-6">
+        <p class="text-sm font-semibold tracking-wide text-emerald-700">
+          {eyebrow}
+        </p>
+
+        <h1
+          class="mt-4 text-4xl leading-[1.05] font-semibold tracking-tight text-slate-900 sm:text-5xl md:text-6xl"
+        >
+          {title}
+        </h1>
+
+        <p class="mt-5 text-lg leading-relaxed text-slate-700 sm:text-xl">
+          {subtitle}
+        </p>
+
+        <!-- CTA buttons -->
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a
+            href={primaryCta.href}
+            class="inline-flex items-center justify-center rounded-full bg-emerald-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-emerald-700"
+          >
+            {primaryCta.label}
+          </a>
+
+          <a
+            href={secondaryCta.href}
+            class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-base font-semibold text-slate-900 ring-1 ring-slate-200 transition hover:bg-slate-50 hover:ring-slate-300"
+          >
+            {secondaryCta.label}
+          </a>
+        </div>
+
+        <!-- Small supporting tagline -->
+        <p class="mt-6 text-sm text-slate-500">
+          Build • Test • Deploy • Iterate
+        </p>
+      </div>
+
+      <!-- Right: dashboard visual -->
+      <div class="lg:col-span-6">
+        <HeroDashboard />
+      </div>
+    </div>
+  </div>
+</section>

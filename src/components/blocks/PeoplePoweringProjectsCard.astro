@@ -2,13 +2,9 @@
 const { quote, author } = Astro.props;
 ---
 
-<!-- Testimonial Card -->
-<div class="testimonial-card">
-  <p class="testimonial-quote">
-    {quote}
-  </p>
-
-  <p class="testimonial-author">
-    {author}
-  </p>
+<div
+  class="flex flex-1 flex-col justify-between gap-8 rounded-3xl bg-gray-100 p-8"
+>
+  <p class="text-xl leading-relaxed">"{quote}"</p>
+  <p class="text-lg">- {author}</p>
 </div>

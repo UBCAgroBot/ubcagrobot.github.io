@@ -5,12 +5,10 @@ const {
   subtitle = "We design and build field-ready systems—perception, autonomy, and real-world deployment.",
   primaryCta = { label: "Get involved", href: "/recruitment" },
   secondaryCta = { label: "Explore projects", href: "/projects" },
-  rightImage = "/landing-hero-card.png", // optional (place in /public)
 } = Astro.props;
 ---
 
-<section class="relative isolate overflow-hidden">
-  <!-- subtle page background -->
+<section class="relative isolate">
   <div class="pointer-events-none absolute inset-0 -z-20">
     <div
       class="absolute inset-0 bg-gradient-to-b from-white via-white to-slate-50"
@@ -18,7 +16,6 @@ const {
     </div>
   </div>
 
-  <!-- STRIPE RIBBON (make it visible by anchoring to mid/lower hero, not bottom of page) -->
   <div class="pointer-events-none absolute inset-x-[-25%] top-[62%] -z-10">
     <div class="agrobot-ribbon agrobot-ribbon--blur"></div>
     <div class="agrobot-ribbon"></div>
@@ -28,7 +25,7 @@ const {
     <div
       class="grid min-h-[calc(100vh-var(--header-height,5rem))] items-center gap-12 py-16 lg:grid-cols-12"
     >
-      <!-- Left: copy -->
+      <!-- Left -->
       <div class="lg:col-span-6">
         <p class="text-sm font-semibold tracking-wide text-emerald-700">
           {eyebrow}
@@ -65,7 +62,7 @@ const {
         </p>
       </div>
 
-      <!-- Right: preview card (optional) -->
+      <!-- Right -->
       <div class="lg:col-span-6">
         <div class="relative mx-auto max-w-xl">
           <div
@@ -76,6 +73,7 @@ const {
           <div
             class="overflow-hidden rounded-[28px] bg-white shadow-[0_24px_70px_-40px_rgba(2,6,23,0.45)] ring-1 ring-slate-200"
           >
+            <!-- top bar -->
             <div
               class="flex items-center gap-2 border-b border-slate-100 px-5 py-4"
             >
@@ -83,17 +81,114 @@ const {
               <span class="h-2.5 w-2.5 rounded-full bg-slate-200"></span>
               <span class="h-2.5 w-2.5 rounded-full bg-slate-200"></span>
               <span class="ml-2 text-xs font-medium text-slate-500"
-                >Agrobot</span
+                >Agrobot Dashboard</span
               >
             </div>
 
-            <div class="p-6">
-              <img
-                src={rightImage}
-                alt=""
-                class="h-auto w-full rounded-2xl"
-                loading="lazy"
-              />
+            <div class="p-5">
+              <!-- fake camera feed -->
+              <div class="relative overflow-hidden rounded-2xl bg-slate-900">
+                <div
+                  class="aspect-[16/10] w-full bg-[linear-gradient(180deg,#c7f9cc_0%,#95d5b2_38%,#40916c_38%,#2d6a4f_100%)]"
+                >
+                </div>
+
+                <!-- crop rows -->
+                <div
+                  class="absolute inset-x-0 top-[42%] bottom-0 flex justify-evenly opacity-70"
+                >
+                  <div class="h-full w-1 bg-emerald-200/40"></div>
+                  <div class="h-full w-1 bg-emerald-200/40"></div>
+                  <div class="h-full w-1 bg-emerald-200/40"></div>
+                  <div class="h-full w-1 bg-emerald-200/40"></div>
+                </div>
+
+                <!-- detection boxes -->
+                <div
+                  class="absolute top-[48%] left-[18%] h-16 w-14 rounded-md border-2 border-lime-300"
+                >
+                  <span
+                    class="absolute -top-6 left-0 rounded bg-lime-300 px-2 py-0.5 text-[10px] font-semibold text-slate-900"
+                  >
+                    crop
+                  </span>
+                </div>
+
+                <div
+                  class="absolute top-[58%] left-[46%] h-12 w-12 rounded-md border-2 border-emerald-300"
+                >
+                  <span
+                    class="absolute -top-6 left-0 rounded bg-emerald-300 px-2 py-0.5 text-[10px] font-semibold text-slate-900"
+                  >
+                    weed
+                  </span>
+                </div>
+
+                <div
+                  class="absolute top-[52%] right-[18%] h-14 w-12 rounded-md border-2 border-sky-300"
+                >
+                  <span
+                    class="absolute -top-6 left-0 rounded bg-sky-300 px-2 py-0.5 text-[10px] font-semibold text-slate-900"
+                  >
+                    row
+                  </span>
+                </div>
+
+                <!-- small status chip -->
+                <div
+                  class="absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm"
+                >
+                  Live vision
+                </div>
+              </div>
+
+              <!-- stats -->
+              <div class="mt-4 grid grid-cols-2 gap-3">
+                <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+                  <p class="text-xs font-medium text-slate-500">Mode</p>
+                  <p class="mt-1 text-sm font-semibold text-slate-900">
+                    Autonomous
+                  </p>
+                </div>
+
+                <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+                  <p class="text-xs font-medium text-slate-500">Battery</p>
+                  <p class="mt-1 text-sm font-semibold text-slate-900">92%</p>
+                </div>
+
+                <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+                  <p class="text-xs font-medium text-slate-500">
+                    Detected crops
+                  </p>
+                  <p class="mt-1 text-sm font-semibold text-slate-900">67</p>
+                </div>
+
+                <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+                  <p class="text-xs font-medium text-slate-500">Path status</p>
+                  <p class="mt-1 text-sm font-semibold text-emerald-700">
+                    On track
+                  </p>
+                </div>
+              </div>
+
+              <!-- bottom status row -->
+              <div
+                class="mt-4 flex items-center justify-between rounded-2xl bg-white px-4 py-3 ring-1 ring-slate-200"
+              >
+                <div>
+                  <p class="text-xs font-medium text-slate-500">
+                    System health
+                  </p>
+                  <p class="text-sm font-semibold text-slate-900">Nominal</p>
+                </div>
+
+                <div
+                  class="flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700"
+                >
+                  <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                  Online
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -109,12 +204,9 @@ const {
       transform: rotate(-8deg);
       border-radius: 999px;
       opacity: 0.95;
-
       background-size: 240% 240%;
       background-position: 0% 50%;
       animation: agrobotGradientMove 10s ease-in-out infinite;
-
-      /* Agrobot palette: leaf → teal → sky → lime */
       background-image: linear-gradient(
         115deg,
         #22c55e 0%,

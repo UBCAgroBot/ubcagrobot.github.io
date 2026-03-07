@@ -1,14 +1,32 @@
 ---
+/*
+Props allow this component to be reused with different text
+without modifying the layout or styling.
+*/
 const {
   eyebrow = "UBC Agrobot",
   title = "Robotics for agriculture",
-  subtitle = "We design and build field-ready systems—perception, autonomy, and real-world deployment.",
+  subtitle = "We design and build field-ready systems. For perception, autonomy, and real-world deployment.",
   primaryCta = { label: "Get involved", href: "/recruitment" },
   secondaryCta = { label: "Explore projects", href: "/projects" },
 } = Astro.props;
 ---
 
+<!--
+Hero section container.
+
+relative + isolate:
+Creates a new stacking context so our background layers,
+gradient ribbon, and content can use z-index safely.
+-->
 <section class="relative isolate">
+  <!--
+  Background gradient layer.
+
+  This sits behind everything else and provides a subtle
+  page background similar to Stripe's landing pages.
+  pointer-events-none ensures it never blocks interactions.
+  -->
   <div class="pointer-events-none absolute inset-0 -z-20">
     <div
       class="absolute inset-0 bg-gradient-to-b from-white via-white to-slate-50"
@@ -16,31 +34,69 @@ const {
     </div>
   </div>
 
+  <!--
+  Animated gradient ribbon.
+
+  This creates the moving "Stripe-style" diagonal band
+  that flows across the hero and into the next section.
+
+  inset-x-[-25%] makes it wider than the viewport so the
+  rotation doesn't expose empty edges.
+
+  Two layers are used:
+  1) blurred glow layer
+  2) crisp ribbon layer
+  -->
   <div class="pointer-events-none absolute inset-x-[-25%] top-[62%] -z-10">
     <div class="agrobot-ribbon agrobot-ribbon--blur"></div>
     <div class="agrobot-ribbon"></div>
   </div>
 
+  <!--
+  Main content container.
+
+  max-w-6xl centers the layout and keeps it readable
+  on large screens.
+  -->
   <div class="mx-auto max-w-6xl px-6">
+    <!--
+    Hero layout grid.
+
+    lg:grid-cols-12 creates a 12-column grid on large screens
+    so we can split content 50/50 between text and dashboard.
+
+    min-h ensures the hero fills the viewport minus the header.
+    -->
     <div
       class="grid min-h-[calc(100vh-var(--header-height,5rem))] items-center gap-12 py-16 lg:grid-cols-12"
     >
-      <!-- Left -->
+      <!-- ===================== -->
+      <!-- LEFT SIDE: HERO TEXT -->
+      <!-- ===================== -->
       <div class="lg:col-span-6">
+        <!-- Small label above the title -->
         <p class="text-sm font-semibold tracking-wide text-emerald-700">
           {eyebrow}
         </p>
 
+        <!-- Main headline -->
         <h1
           class="mt-4 text-4xl leading-[1.05] font-semibold tracking-tight text-slate-900 sm:text-5xl md:text-6xl"
         >
           {title}
         </h1>
 
+        <!-- Supporting description -->
         <p class="mt-5 text-lg leading-relaxed text-slate-700 sm:text-xl">
           {subtitle}
         </p>
 
+        <!--
+        Primary and secondary CTA buttons.
+
+        Primary = filled green button
+        Secondary = outlined button
+        -->
         <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <a
             href={primaryCta.href}
@@ -57,43 +113,60 @@ const {
           </a>
         </div>
 
+        <!-- Small tagline -->
         <p class="mt-6 text-sm text-slate-500">
           Build • Test • Deploy • Iterate
         </p>
       </div>
 
-      <!-- Right -->
+      <!-- =========================== -->
+      <!-- RIGHT SIDE: DASHBOARD MOCK -->
+      <!-- =========================== -->
       <div class="lg:col-span-6">
+        <!--
+        Card wrapper.
+
+        This adds the glowing blurred halo behind the dashboard
+        to make it feel elevated above the ribbon background.
+        -->
         <div class="relative mx-auto max-w-xl">
+          <!-- Glow effect behind the card -->
           <div
             class="absolute -inset-6 -z-10 rounded-[28px] bg-white/70 ring-1 ring-slate-200/70 blur-xl"
           >
           </div>
 
+          <!-- Main dashboard card -->
           <div
             class="overflow-hidden rounded-[28px] bg-white shadow-[0_24px_70px_-40px_rgba(2,6,23,0.45)] ring-1 ring-slate-200"
           >
-            <!-- top bar -->
+            <!-- Fake window title bar -->
             <div
               class="flex items-center gap-2 border-b border-slate-100 px-5 py-4"
             >
               <span class="h-2.5 w-2.5 rounded-full bg-slate-200"></span>
               <span class="h-2.5 w-2.5 rounded-full bg-slate-200"></span>
               <span class="h-2.5 w-2.5 rounded-full bg-slate-200"></span>
-              <span class="ml-2 text-xs font-medium text-slate-500"
-                >Agrobot Dashboard</span
-              >
+              <span class="ml-2 text-xs font-medium text-slate-500">
+                Agrobot Dashboard
+              </span>
             </div>
 
             <div class="p-5">
-              <!-- fake camera feed -->
+              <!--
+              Mock "live camera feed" for robot vision.
+
+              This simulates what a real robotics UI might show
+              (computer vision detections in crop rows).
+              -->
               <div class="relative overflow-hidden rounded-2xl bg-slate-900">
+                <!-- Fake field background -->
                 <div
                   class="aspect-[16/10] w-full bg-[linear-gradient(180deg,#c7f9cc_0%,#95d5b2_38%,#40916c_38%,#2d6a4f_100%)]"
                 >
                 </div>
 
-                <!-- crop rows -->
+                <!-- Crop rows -->
                 <div
                   class="absolute inset-x-0 top-[42%] bottom-0 flex justify-evenly opacity-70"
                 >
@@ -103,7 +176,7 @@ const {
                   <div class="h-full w-1 bg-emerald-200/40"></div>
                 </div>
 
-                <!-- detection boxes -->
+                <!-- Simulated object detection boxes -->
                 <div
                   class="absolute top-[48%] left-[18%] h-16 w-14 rounded-md border-2 border-lime-300"
                 >
@@ -134,7 +207,7 @@ const {
                   </span>
                 </div>
 
-                <!-- small status chip -->
+                <!-- Status badge -->
                 <div
                   class="absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm"
                 >
@@ -142,7 +215,7 @@ const {
                 </div>
               </div>
 
-              <!-- stats -->
+              <!-- Robot status cards -->
               <div class="mt-4 grid grid-cols-2 gap-3">
                 <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
                   <p class="text-xs font-medium text-slate-500">Mode</p>
@@ -171,7 +244,7 @@ const {
                 </div>
               </div>
 
-              <!-- bottom status row -->
+              <!-- System health row -->
               <div
                 class="mt-4 flex items-center justify-between rounded-2xl bg-white px-4 py-3 ring-1 ring-slate-200"
               >
@@ -196,6 +269,12 @@ const {
     </div>
   </div>
 
+  <!--
+  Custom CSS for the animated gradient ribbon.
+
+  Tailwind handles most styling, but this animation
+  is easier to implement with custom CSS.
+  -->
   <style>
     .agrobot-ribbon {
       height: 220px;

@@ -1,18 +1,48 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import AgrobotHero from "../components/blocks/AgrobotHero.astro";
+import ProjectsAgrobot from "../components/blocks/ProjectsAgrobot.astro";
+import ProjectCloserLook from "../components/blocks/ProjectCloserLook.astro";
+import WhatsNextForAgrobot from "../components/blocks/WhatsNextForAgrobot.astro";
+import Agroponics from "../components/blocks/Agroponics.astro";
+import BehindTheBuild from "../components/blocks/BehindTheBuild.astro";
+import PeoplePoweringProjects from "../components/blocks/PeoplePoweringProjects.astro";
+import GetInvolvedWithAgrobot from "../components/blocks/GetInvolvedWithAgrobot.astro";
 ---
 
 <Layout>
   <main
-    class="flex min-h-screen w-full flex-col items-center gap-24 px-6 py-20"
+    class="flex min-h-screen w-full flex-col items-center gap-32 px-6 py-20"
   >
     <!-- Hero -->
-    <div class="w-full max-w-7xl">
+    <div class="mb-10 w-full max-w-7xl">
       <AgrobotHero />
     </div>
 
     <!-- Body of the page -->
-    <div class="flex w-full max-w-4xl flex-col gap-24"></div>
+    <div class="flex w-full max-w-4xl flex-col gap-24">
+      <ProjectsAgrobot />
+    </div>
+
+    <div class="w-full max-w-7xl">
+      <ProjectCloserLook />
+    </div>
+
+    <div class="flex w-full max-w-4xl flex-col gap-24">
+      <WhatsNextForAgrobot />
+      <Agroponics />
+    </div>
+
+    <div class="w-full max-w-6xl">
+      <BehindTheBuild />
+    </div>
+
+    <div class="w-full max-w-7xl gap-24">
+      <PeoplePoweringProjects />
+    </div>
+
+    <div class="flex w-full max-w-4xl flex-col gap-24">
+      <GetInvolvedWithAgrobot />
+    </div>
   </main>
 </Layout>

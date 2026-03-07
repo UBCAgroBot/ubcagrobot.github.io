@@ -1,0 +1,62 @@
+---
+/*
+Animated gradient ribbon background.
+*/
+---
+
+<div class="pointer-events-none absolute inset-x-[-25%] top-[62%] -z-10">
+  <div class="agrobot-ribbon agrobot-ribbon--blur"></div>
+  <div class="agrobot-ribbon"></div>
+</div>
+
+<style>
+  .agrobot-ribbon {
+    height: 220px;
+    width: 140%;
+    margin: 0 auto;
+    transform: rotate(-8deg);
+    border-radius: 999px;
+    opacity: 0.95;
+    background-size: 240% 240%;
+    background-position: 0% 50%;
+    animation: agrobotGradientMove 10s ease-in-out infinite;
+    background-image: linear-gradient(
+      115deg,
+      #22c55e 0%,
+      #10b981 18%,
+      #06b6d4 40%,
+      #60a5fa 60%,
+      #a3e635 78%,
+      #22c55e 100%
+    );
+  }
+
+  .agrobot-ribbon--blur {
+    position: absolute;
+    inset: 0;
+    transform: rotate(-8deg);
+    filter: blur(36px);
+    opacity: 0.6;
+    mix-blend-mode: multiply;
+    animation-duration: 12s;
+  }
+
+  @keyframes agrobotGradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .agrobot-ribbon,
+    .agrobot-ribbon--blur {
+      animation: none;
+    }
+  }
+</style>

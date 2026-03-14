@@ -1,4 +1,18 @@
 ---
+interface Subteam {
+  id: string;
+  name: string;
+  image: string;
+  description: string;
+  responsibilities: string[];
+}
+
+interface TeamGroup {
+  group: string;
+  name: string;
+  subteams: Subteam[];
+}
+
 const {
   teams = [
     {
@@ -106,7 +120,7 @@ const {
       ],
     },
   ],
-} = Astro.props;
+} = Astro.props as { teams: TeamGroup[] };
 import SubteamCard from "./SubteamCard.astro";
 ---
 

@@ -1,0 +1,60 @@
+---
+const {
+  teams = [
+    {
+      group: "agrobot-team",
+      name: "Agrobot Team",
+      subteams: [
+        {
+          id: "eletrical",
+          name: "Electrical",
+          image: "/images/electrical.jpg",
+          description:
+            "The Electrical Team plays a crucial role in AgroBot’s success by designing, assembling, and integrating its power systems. They create detailed electrical schematics, select high-quality components, and ensure efficient power management throughout the robot. The team rigorously tests and implements quality control measures to guarantee reliable performance in all conditions. Their work ensures that AgroBot’s electrical systems are robust, dependable, and capable of supporting its autonomous operations effectively.",
+        },
+        {
+          id: "applied-ai",
+          name: "Applied AI",
+          image: "/images/applied-ai.jpg",
+          description:
+            "The Applied AI sub-team pioneers the development of machine learning models and AI to tackle a variety of AgroBot’s tasks, from plant identification to advanced machine vision. The team works on detecting maize and weeds, segmenting grape clusters, and integrating their models into the Robot Operating System (ROS) for real-world application. By exploring the intersection of AI research and emerging Agri-Tech, members continually push the boundaries of agricultural innovation. Their work ensures AgroBot can operate efficiently and accurately across diverse farming environments, making a tangible impact in sustainable agriculture.",
+        },
+      ],
+    },
+    {
+      group: "agroponics-team",
+      name: "Agroponics Team",
+      subteams: [],
+    },
+    {
+      group: "administration-team",
+      name: "Administration Team",
+      subteams: [],
+    },
+  ],
+} = Astro.props;
+import SubteamCard from "./SubteamCard.astro";
+---
+
+<div class="mx-auto bg-white px-4 py-16 text-center sm:px-6 sm:py-24 lg:px-8">
+  <h2 class="mb-8 text-3xl tracking-tight">Learn About Our Subteams</h2>
+
+  {
+    teams.map((group) => (
+      <div class="mx-auto mb-12 w-fit rounded-3xl bg-gray-100 p-8">
+        <h2 class="mb-8 text-3xl tracking-tight">{group.name}</h2>
+
+        <div class="flex flex-wrap justify-center gap-8">
+          {group.subteams.map((team) => (
+            <SubteamCard
+              id={team.id}
+              name={team.name}
+              image={team.image}
+              description={team.description}
+            />
+          ))}
+        </div>
+      </div>
+    ))
+  }
+</div>

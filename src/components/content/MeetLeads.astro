@@ -1,0 +1,240 @@
+---
+const leads = [
+  {
+    name: "Lead 1",
+    img: "/images/lead1.jpg",
+    role: "Web Dev Lead",
+    linkedin: "https://www.linkedin.com/in/lisac777/",
+  },
+  {
+    name: "Lead 2",
+    img: "/images/lead2.jpg",
+    role: "Mechanical Lead",
+    linkedin: "https://www.linkedin.com/in/lead2/",
+  },
+  {
+    name: "Lead 3",
+    img: "/images/lead3.jpg",
+    role: "Electrical Lead",
+    linkedin: "https://www.linkedin.com/in/lead3/",
+  },
+  {
+    name: "Lead 4",
+    img: "/images/lead4.jpg",
+    role: "Design Lead",
+    linkedin: "https://www.linkedin.com/in/lead4/",
+  },
+  {
+    name: "Lead 5",
+    img: "/images/lead5.jpg",
+    role: "Operations Lead",
+    linkedin: "https://www.linkedin.com/in/lead5/",
+  },
+  {
+    name: "Lead 6",
+    img: "/images/lead6.jpg",
+    role: "Firmware Lead",
+    linkedin: "https://www.linkedin.com/in/lead6/",
+  },
+  {
+    name: "Lead 7",
+    img: "/images/lead7.jpg",
+    role: "Business Lead",
+    linkedin: "https://www.linkedin.com/in/lead7/",
+  },
+];
+
+const scrollingLeads = [...leads, ...leads];
+---
+
+<section class="bg-neutral-100 py-16">
+  <div class="mx-auto max-w-7xl px-6">
+    <h2
+      class="mb-10 text-center text-4xl font-semibold tracking-tight text-black"
+    >
+      Meet the leads
+    </h2>
+
+    <div class="relative">
+      <div
+        id="meet-the-leads-carousel"
+        class="no-scrollbar flex cursor-grab gap-6 overflow-x-auto px-2 pb-4 active:cursor-grabbing"
+      >
+        {
+          scrollingLeads.map((lead, index) => (
+            <article
+              class="group shrink-0 text-center"
+              aria-label={`${lead.name}, ${lead.role}`}
+            >
+              {lead.linkedin ? (
+                <a
+                  href={lead.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="lead-link block"
+                  aria-label={`View ${lead.name}'s LinkedIn profile`}
+                >
+                  <div class="h-32 w-32 overflow-hidden rounded-[28px] bg-white shadow-sm transition duration-300 group-hover:-translate-y-1 group-hover:shadow-md sm:h-36 sm:w-36 md:h-40 md:w-40">
+                    <img
+                      src={lead.img}
+                      alt={lead.name}
+                      class="h-full w-full object-cover"
+                      loading={index < leads.length ? "eager" : "lazy"}
+                      draggable="false"
+                    />
+                  </div>
+                </a>
+              ) : (
+                <div class="h-32 w-32 overflow-hidden rounded-[28px] bg-white shadow-sm transition duration-300 group-hover:-translate-y-1 group-hover:shadow-md sm:h-36 sm:w-36 md:h-40 md:w-40">
+                  <img
+                    src={lead.img}
+                    alt={lead.name}
+                    class="h-full w-full object-cover"
+                    loading={index < leads.length ? "eager" : "lazy"}
+                    draggable="false"
+                  />
+                </div>
+              )}
+
+              <div class="mt-3">
+                <p class="text-sm font-medium text-neutral-900">{lead.name}</p>
+                <p class="text-xs text-neutral-500">{lead.role}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div
+        class="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-neutral-100 to-transparent"
+      >
+      </div>
+      <div
+        class="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-neutral-100 to-transparent"
+      >
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<script>
+  const carousel = document.getElementById("meet-the-leads-carousel");
+
+  if (carousel) {
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let autoScrollPausedUntil = 0;
+    let dragged = false;
+
+    const pauseAutoScroll = (ms = 800) => {
+      autoScrollPausedUntil = Date.now() + ms;
+    };
+
+    const getLoopPoint = () => carousel.scrollWidth / 2;
+
+    const normalizeScroll = () => {
+      const loopPoint = getLoopPoint();
+
+      if (carousel.scrollLeft >= loopPoint) {
+        carousel.scrollLeft -= loopPoint;
+      } else if (carousel.scrollLeft < 0) {
+        carousel.scrollLeft += loopPoint;
+      }
+    };
+
+    const autoScroll = () => {
+      if (!isDown && Date.now() >= autoScrollPausedUntil) {
+        carousel.scrollLeft += 0.35;
+        normalizeScroll();
+      }
+
+      requestAnimationFrame(autoScroll);
+    };
+
+    requestAnimationFrame(autoScroll);
+
+    carousel.addEventListener("mousedown", (e) => {
+      isDown = true;
+      dragged = false;
+      startX = e.pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft;
+    });
+
+    carousel.addEventListener("mouseleave", () => {
+      if (isDown) {
+        isDown = false;
+        pauseAutoScroll(600);
+        normalizeScroll();
+      }
+    });
+
+    carousel.addEventListener("mouseup", () => {
+      if (isDown) {
+        isDown = false;
+        pauseAutoScroll(600);
+        normalizeScroll();
+      }
+    });
+
+    carousel.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+
+      const x = e.pageX - carousel.offsetLeft;
+      const walk = x - startX;
+
+      if (Math.abs(walk) > 5) {
+        dragged = true;
+      }
+
+      carousel.scrollLeft = scrollLeft - walk * 1.2;
+      normalizeScroll();
+    });
+
+    carousel.addEventListener(
+      "touchstart",
+      () => {
+        pauseAutoScroll(800);
+      },
+      { passive: true },
+    );
+
+    carousel.addEventListener(
+      "touchmove",
+      () => {
+        normalizeScroll();
+      },
+      { passive: true },
+    );
+
+    carousel.addEventListener(
+      "wheel",
+      () => {
+        pauseAutoScroll(500);
+        requestAnimationFrame(normalizeScroll);
+      },
+      { passive: true },
+    );
+
+    carousel.querySelectorAll(".lead-link").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        if (dragged) {
+          e.preventDefault();
+          dragged = false;
+        }
+      });
+    });
+  }
+</script>

@@ -1,23 +1,100 @@
 ---
-const { id, name, image, description, responsibilities } = Astro.props;
+const { id, name, image, description, responsibilities = [] } = Astro.props;
 ---
 
-<div class="flex flex-col items-center">
+<div class="group relative flex flex-col items-center">
   <button
     type="button"
-    class="group flex flex-col items-center focus:outline-none"
-    onclick={`document.getElementById('${id}').showModal()`}
+    class="relative z-10 flex flex-col items-center focus:outline-none"
+    onclick={`const dlg = document.getElementById('${id}'); if (dlg && typeof dlg.showModal === 'function') dlg.showModal();`}
   >
     <div
-      class="h-24 w-24 overflow-hidden rounded-2xl bg-gray-300 transition-transform group-hover:scale-105"
+      class="h-24 w-24 overflow-hidden rounded-2xl bg-gray-300 transition-transform duration-300 group-hover:scale-105"
     >
-      <img
-        src={image}
-        alt={name}
-        class="h-full w-full rounded-2xl object-cover"
-      />
+      <img src={image} alt={name} class="h-full w-full object-cover" />
     </div>
 
     <p class="mt-2 text-sm">{name}</p>
   </button>
+
+  <div
+    class="absolute bottom-full z-20 mb-4 w-72 scale-95 rounded-2xl bg-white p-4 text-left opacity-0 shadow-xl transition-all duration-300 group-hover:scale-100 group-hover:opacity-100"
+  >
+    <button
+      type="button"
+      class="block w-full cursor-pointer"
+      onclick={`const dlg = document.getElementById('${id}'); if (dlg && typeof dlg.showModal === 'function') dlg.showModal();`}
+    >
+      <img
+        src={image}
+        alt={name}
+        class="mb-3 h-32 w-full rounded-xl object-cover"
+      />
+
+      <h3 class="mb-2 text-lg font-semibold">{name}</h3>
+
+      <p class="line-clamp-4 text-sm text-gray-600">
+        {description || "More details coming soon."}
+      </p>
+    </button>
+  </div>
+
+  <dialog
+    id={id}
+    class="fixed top-1/2 left-1/2 z-50 w-[min(90vw,700px)] -translate-x-1/2 -translate-y-1/2 rounded-2xl border-none bg-transparent p-0 backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+  >
+    <div class="overflow-hidden rounded-2xl bg-white shadow-2xl">
+      <!-- Close button -->
+      <form method="dialog" class="flex justify-end p-4 pb-0">
+        <button
+          type="submit"
+          class="inline-flex items-center justify-center p-2 text-gray-400 transition hover:text-gray-700 focus:outline-none"
+          aria-label="Close"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-5 w-5"
+            aria-hidden="true"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </form>
+
+      <!-- Content -->
+      <div class="flex flex-col items-center p-6 pt-4">
+        <img
+          src={image}
+          alt={name}
+          class="mb-4 h-32 w-32 rounded-2xl object-cover"
+        />
+
+        <h2 class="mb-2 text-2xl font-bold">{name}</h2>
+
+        <p class="mb-4 text-center text-gray-700">
+          {description || "More details coming soon."}
+        </p>
+
+        {
+          responsibilities.length > 0 && (
+            <div class="w-full">
+              <h3 class="mb-2 text-lg font-semibold">Responsibilities</h3>
+              <ul class="list-inside list-disc text-gray-600">
+                {responsibilities.map((item: string) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </dialog>
 </div>

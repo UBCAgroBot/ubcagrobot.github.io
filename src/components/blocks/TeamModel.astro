@@ -40,7 +40,7 @@ const { id, name, image, description, responsibilities, teamImage } =
         </button>
 
         <ul class="mt-6 ml-5 list-disc">
-          {responsibilities.map((r) => <li>{r}</li>)}
+          {responsibilities.map((r: string) => <li>{r}</li>)}
         </ul>
       </div>
     </div>

@@ -1,0 +1,48 @@
+---
+const { id, name, image, description, responsibilities, teamImage } =
+  Astro.props;
+---
+
+<dialog id={id} class="border-none bg-transparent p-0">
+  <!-- Backdrop + Centering -->
+  <div class="fixed inset-0 flex items-center justify-center bg-black/50">
+    <!-- Click outside to close -->
+    <button
+      type="button"
+      class="absolute inset-0"
+      onclick="this.closest('dialog').close()"></button>
+
+    <!-- Modal content -->
+    <div
+      class="relative w-[90vw] max-w-4xl overflow-hidden rounded-[2rem] bg-white"
+    >
+      <!-- Image -->
+      <div class="h-64 w-full bg-gray-300">
+        <img
+          src={teamImage}
+          alt={`${name} team`}
+          class="h-full w-full object-cover object-[50%_40%]"
+        />
+      </div>
+
+      <!-- Content -->
+      <div class="p-8 text-left">
+        <h2 class="mb-4 text-3xl font-semibold">
+          About {name}
+        </h2>
+
+        <p class="mb-6 text-gray-700">
+          {description}
+        </p>
+
+        <button class="rounded-full bg-gray-200 px-6 py-3">
+          Roles and Responsibilities
+        </button>
+
+        <ul class="mt-6 ml-5 list-disc">
+          {responsibilities.map((r) => <li>{r}</li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+</dialog>

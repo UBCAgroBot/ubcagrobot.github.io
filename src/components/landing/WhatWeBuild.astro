@@ -1,0 +1,49 @@
+---
+const cards = [
+  {
+    title: "Agrobot",
+    image: "https://placehold.co/800x600",
+    description:
+      "Autonomous robots that support precision agriculture, reduce manual labour, and improve farm efficiency.",
+    link: "/projects",
+  },
+  {
+    title: "Agroponics",
+    image: "https://placehold.co/800x600",
+    description:
+      "Vertical hydroponic systems that maximize space, reduce resource use, and promote sustainable urban farming.",
+    link: "/projects",
+  },
+];
+---
+
+<section class="bg-white px-8 py-20 text-center">
+  <h2 class="mb-12 text-5xl font-medium">What we build</h2>
+
+  <div class="mx-auto grid max-w-5xl grid-cols-1 gap-10 md:grid-cols-2">
+    {
+      cards.map((card) => (
+        <article class="flex flex-col items-center">
+          <img
+            src={card.image}
+            alt={card.title}
+            class="aspect-[4/3] w-full rounded-2xl object-cover"
+          />
+
+          <h3 class="mt-6 mb-2 text-4xl font-medium">{card.title}</h3>
+
+          <p class="mb-6 max-w-sm text-base leading-relaxed text-gray-700">
+            {card.description}
+          </p>
+
+          <a
+            href={card.link}
+            class="rounded-full bg-emerald-600 px-7 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700"
+          >
+            Learn more
+          </a>
+        </article>
+      ))
+    }
+  </div>
+</section>

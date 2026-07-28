@@ -7,16 +7,16 @@ const leads = [
     linkedin: "https://www.linkedin.com/in/lisac777/",
   },
   {
-    name: "Lead 2",
+    name: "Salhajvir Kalkat",
     img: "/images/lead2.jpg",
-    role: "Mechanical Lead",
-    linkedin: "https://www.linkedin.com/in/lead2/",
+    role: "Captain",
+    linkedin: "https://www.linkedin.com/in/saihajvir/",
   },
   {
-    name: "Lead 3",
+    name: "Ishaan Datta",
     img: "/images/lead3.jpg",
-    role: "Electrical Lead",
-    linkedin: "https://www.linkedin.com/in/lead3/",
+    role: "Applied AI Lead",
+    linkedin: "https://www.linkedin.com/in/ishaan-datta/",
   },
   {
     name: "Lead 4",
@@ -58,7 +58,7 @@ const scrollingLeads = [...leads, ...leads];
     <div class="relative">
       <div
         id="meet-the-leads-carousel"
-        class="no-scrollbar flex cursor-grab gap-6 overflow-x-auto px-2 pb-4 active:cursor-grabbing"
+        class="no-scrollbar -mt-2 flex cursor-grab gap-6 overflow-x-auto px-2 pt-2 pb-4 active:cursor-grabbing"
       >
         {
           scrollingLeads.map((lead, index) => (

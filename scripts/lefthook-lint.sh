@@ -24,6 +24,9 @@ if [ ${#files[@]} -eq 0 ]; then
   exit 0
 fi
 
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+export PATH="$ROOT_DIR/node_modules/.bin:$PATH"
+
 if [ "$check_only" -eq 1 ]; then
   oxlint --quiet "${files[@]}" && eslint "${files[@]}"
 else

@@ -1,5 +1,6 @@
 ---
 // src/components/landing/RootsSection.astro
+import agrobotStudentsWorkingLanding from "../../assets/images/agrobot-students-working-landing.jpg";
 ---
 
 <section class="bg-white px-6 py-24 sm:py-28 lg:px-8">
@@ -30,7 +31,7 @@
     <!-- Image -->
     <div class="flex justify-center lg:justify-end">
       <img
-        src="/agrobot-photo.jpg"
+        src={agrobotStudentsWorkingLanding.src}
         alt="UBC Agrobot students working on a robotics project"
         class="h-[300px] w-full max-w-[440px] rounded-[2rem] object-cover shadow-sm sm:h-[320px]"
       />

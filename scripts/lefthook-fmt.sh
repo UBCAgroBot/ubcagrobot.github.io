@@ -31,6 +31,9 @@ if [ ${#js_files[@]} -eq 0 ] && [ ${#prettier_files[@]} -eq 0 ]; then
   exit 0
 fi
 
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+export PATH="$ROOT_DIR/node_modules/.bin:$PATH"
+
 if [ ${#js_files[@]} -gt 0 ]; then
   if [ "$check_only" -eq 1 ]; then
     oxfmt --check "${js_files[@]}"

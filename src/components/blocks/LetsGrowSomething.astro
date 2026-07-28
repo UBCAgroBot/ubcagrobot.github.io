@@ -1,75 +1,90 @@
-<div class="contact-section max-w-6xl">
-  <!-- Text content: heading and description -->
-  <div class="contact-text mb-10 flex flex-col gap-4">
-    <!-- Main heading -->
-    <h1 class="text-5xl">Let's grow something great together</h1>
+---
+import Section from "../ui/Section.astro";
+import Button from "../ui/Button.astro";
 
-    <!-- Description paragraph -->
-    <p class="max-w-2xl text-xl">
+const fieldClasses =
+  "rounded-2xl bg-slate-100 px-6 py-4 text-slate-900 placeholder:text-slate-500 outline-none transition focus:bg-white focus:ring-2 focus:ring-brand-500";
+---
+
+<Section>
+  <div class="mb-10 flex max-w-2xl flex-col gap-4">
+    <h1
+      class="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl"
+    >
+      Let's grow something great together
+    </h1>
+
+    <p class="text-lg leading-relaxed text-slate-600">
       Have questions about Agrobot or want to collaborate? Reach out to our team
       and we would love to connect and share our story.
     </p>
   </div>
 
-  <!-- Form and image container -->
-  <div class="contact-form-container flex w-full flex-row gap-45">
-    <!-- Contact form -->
-    <form id="contact-form" class="contact-form flex flex-1 flex-col gap-6">
-      <!-- Name input field -->
+  <div class="flex w-full flex-col gap-12 lg:flex-row">
+    <form
+      id="contact-form"
+      class="flex flex-1 flex-col gap-4"
+      aria-label="Contact form"
+    >
+      <label class="sr-only" for="contact-name">Name</label>
       <input
+        id="contact-name"
         type="text"
         name="name"
         placeholder="Name"
         required
-        class="rounded-2xl bg-[#d9d9d9] px-8 py-4 outline-none focus:ring-2 focus:ring-gray-300"
+        class={fieldClasses}
       />
-      <!-- Email input field -->
+
+      <label class="sr-only" for="contact-email">Email</label>
       <input
+        id="contact-email"
         type="email"
         name="email"
         placeholder="Email"
         required
-        class="rounded-2xl bg-[#d9d9d9] px-8 py-4 outline-none focus:ring-2 focus:ring-gray-300"
+        class={fieldClasses}
       />
-      <!-- Subject input field -->
+
+      <label class="sr-only" for="contact-subject">Subject</label>
       <input
+        id="contact-subject"
         type="text"
         name="subject"
         placeholder="Subject"
         required
-        class="rounded-2xl bg-[#d9d9d9] px-8 py-4 outline-none focus:ring-2 focus:ring-gray-300"
+        class={fieldClasses}
       />
-      <!-- Message text area -->
+
+      <label class="sr-only" for="contact-message">Message</label>
       <textarea
+        id="contact-message"
         name="message"
-        placeholder="Your Message"
+        placeholder="Your message"
         required
-        class="h-[272px] resize-none rounded-2xl bg-[#d9d9d9] px-8 py-6 outline-none focus:ring-2 focus:ring-gray-300"
-      ></textarea>
-      <!-- Submit button -->
-      <button
-        type="submit"
-        class="justify text-md h-[40px] w-[269px] items-center self-center rounded-full bg-[#d9d9d9] text-center transition-all duration-300 hover:cursor-pointer hover:bg-[#cccccc]"
-      >
-        Send Message
-      </button>
+        rows={7}
+        class={`resize-none ${fieldClasses}`}></textarea>
+
+      <Button type="submit" class="self-start">Send message</Button>
+      <p id="contact-form-status" class="text-sm text-slate-500" role="status">
+      </p>
     </form>
 
-    <!-- Image -->
-    <div class="contact-image w-[409px] shrink-0 rounded-[3rem] bg-gray-200">
+    <div class="w-full shrink-0 overflow-hidden rounded-3xl lg:w-[380px]">
       <img
         src="/contact-us.jpg"
-        alt="UBC Agrobot Team Contact Us"
-        class="h-full w-full rounded-[3rem] object-cover"
+        alt="Members of the UBC Agrobot team"
+        class="h-64 w-full object-cover lg:h-full"
       />
     </div>
   </div>
-</div>
+</Section>
 
 <script>
   const form = document.getElementById(
     "contact-form",
   ) as HTMLFormElement | null;
+  const status = document.getElementById("contact-form-status");
 
   if (form) {
     form.addEventListener("submit", (e) => {
@@ -96,6 +111,10 @@
         `&body=${encodeURIComponent(body)}`;
 
       window.location.href = mailtoUrl;
+
+      if (status) {
+        status.textContent = "Opening your email client...";
+      }
     });
   }
 </script>

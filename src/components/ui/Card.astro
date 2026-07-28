@@ -1,0 +1,16 @@
+---
+/*
+Shared card shell (radius, ring, shadow) so cards look consistent across
+every page instead of each block re-deriving its own rounded/shadow values.
+*/
+interface Props {
+  as?: "div" | "article" | "li";
+  class?: string;
+}
+
+const { as: Tag = "div", class: className = "" } = Astro.props;
+---
+
+<Tag class={`rounded-3xl bg-white p-8 ring-1 ring-slate-900/5 ${className}`}>
+  <slot />
+</Tag>

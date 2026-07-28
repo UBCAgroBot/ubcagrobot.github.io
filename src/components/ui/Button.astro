@@ -1,0 +1,51 @@
+---
+/*
+Standard CTA styling. Renders an <a> when `href` is given, otherwise a
+<button>, so it works for both navigation links and form submits.
+*/
+interface Props {
+  href?: string;
+  variant?: "primary" | "secondary" | "outline";
+  size?: "md" | "lg";
+  type?: "button" | "submit";
+  target?: string;
+  rel?: string;
+  class?: string;
+}
+
+const {
+  href,
+  variant = "primary",
+  size = "md",
+  type = "button",
+  target,
+  rel,
+  class: className = "",
+} = Astro.props;
+
+const variants: Record<string, string> = {
+  primary: "bg-brand-600 text-white hover:bg-brand-700",
+  secondary:
+    "bg-white text-slate-900 ring-1 ring-slate-200 hover:bg-slate-50 hover:ring-slate-300",
+  outline: "bg-transparent text-white ring-1 ring-white/50 hover:bg-white/10",
+};
+
+const sizes: Record<string, string> = {
+  md: "px-5 py-2.5 text-sm",
+  lg: "px-6 py-3 text-base",
+};
+
+const classes = `inline-flex items-center justify-center gap-2 rounded-full font-semibold transition ${variants[variant]} ${sizes[size]} ${className}`;
+---
+
+{
+  href ? (
+    <a href={href} target={target} rel={rel} class={classes}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes}>
+      <slot />
+    </button>
+  )
+}

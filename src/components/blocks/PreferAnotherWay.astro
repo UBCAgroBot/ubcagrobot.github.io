@@ -1,48 +1,37 @@
-<div class="alt-contact-section">
-  <!-- Section heading -->
-  <h1 class="alt-contact-title mb-8 text-5xl">
+---
+import Section from "../ui/Section.astro";
+
+const contactLinks = [
+  { label: "Instagram", href: "https://www.instagram.com/ubcagrobot" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/ubcagrobot/" },
+  { label: "Email", href: "mailto:ubcagrobot@gmail.com" },
+];
+---
+
+<Section tone="tint">
+  <h2
+    class="mb-8 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl"
+  >
     Prefer another way to reach us?
-  </h1>
+  </h2>
 
-  <!-- Buttons for alternative contact -->
-  <div class="alt-contact-buttons flex flex-wrap gap-26">
-    <!-- Instagram button -->
-    <a
-      href="https://www.instagram.com/ubcagrobot"
-      class="btn-instagram group flex h-[80px] w-[269px] items-center justify-between rounded-full bg-[#d9d9d9] px-8 py-4 text-[26px] transition-all duration-300 hover:cursor-pointer hover:bg-[#cccccc]"
-    >
-      <span> Instagram </span>
-      <span
-        class="ml-4 text-xl transition-transform duration-300 group-hover:translate-x-1"
-      >
-        →
-      </span>
-    </a>
-
-    <!-- LinkedIn button -->
-    <a
-      href="https://www.linkedin.com/company/ubcagrobot/"
-      class="btn-linkedin group flex h-[80px] w-[269px] items-center justify-between rounded-full bg-[#d9d9d9] px-8 py-4 text-[26px] transition-all duration-300 hover:cursor-pointer hover:bg-[#cccccc]"
-    >
-      <span> LinkedIn </span>
-      <span
-        class="ml-4 text-xl transition-transform duration-300 group-hover:translate-x-1"
-      >
-        →
-      </span>
-    </a>
-
-    <!-- Email button -->
-    <a
-      href="mailto:ubcagrobot@gmail.com"
-      class="btn-email group flex h-[80px] w-[269px] items-center justify-between rounded-full bg-[#d9d9d9] px-8 py-4 text-[26px] transition-all duration-300 hover:cursor-pointer hover:bg-[#cccccc]"
-    >
-      <span> Email </span>
-      <span
-        class="ml-4 text-xl transition-transform duration-300 group-hover:translate-x-1"
-      >
-        →
-      </span>
-    </a>
+  <div class="flex flex-wrap gap-4">
+    {
+      contactLinks.map((link) => (
+        <a
+          href={link.href}
+          target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+          rel={
+            link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"
+          }
+          class="group flex w-full max-w-72 items-center justify-between rounded-full bg-white px-8 py-4 text-lg font-medium text-slate-900 ring-1 ring-slate-200 transition hover:bg-slate-50 hover:ring-slate-300 sm:w-auto"
+        >
+          <span>{link.label}</span>
+          <span class="ml-4 transition-transform duration-300 group-hover:translate-x-1">
+            &rarr;
+          </span>
+        </a>
+      ))
+    }
   </div>
-</div>
+</Section>

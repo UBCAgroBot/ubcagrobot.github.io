@@ -1,15 +1,20 @@
 ---
+import Section from "../ui/Section.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import Button from "../ui/Button.astro";
+import FallbackImage from "../ui/FallbackImage.astro";
+
 const cards = [
   {
     title: "Agrobot",
-    image: "https://placehold.co/800x600",
+    image: "",
     description:
       "Autonomous robots that support precision agriculture, reduce manual labour, and improve farm efficiency.",
     link: "/projects",
   },
   {
     title: "Agroponics",
-    image: "https://placehold.co/800x600",
+    image: "",
     description:
       "Vertical hydroponic systems that maximize space, reduce resource use, and promote sustainable urban farming.",
     link: "/projects",
@@ -17,33 +22,30 @@ const cards = [
 ];
 ---
 
-<section class="bg-white px-8 py-20 text-center">
-  <h2 class="mb-12 text-5xl font-medium">What we build</h2>
+<Section tone="tint">
+  <SectionHeading title="What we build" align="center" class="mx-auto" />
 
-  <div class="mx-auto grid max-w-5xl grid-cols-1 gap-10 md:grid-cols-2">
+  <div class="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-10 md:grid-cols-2">
     {
       cards.map((card) => (
-        <article class="flex flex-col items-center">
-          <img
+        <article class="flex flex-col items-center text-center">
+          <FallbackImage
             src={card.image}
             alt={card.title}
-            class="aspect-[4/3] w-full rounded-2xl object-cover"
+            class="aspect-4/3 w-full rounded-2xl"
           />
 
-          <h3 class="mt-6 mb-2 text-4xl font-medium">{card.title}</h3>
+          <h3 class="mt-6 mb-2 text-2xl font-semibold text-slate-900">
+            {card.title}
+          </h3>
 
-          <p class="mb-6 max-w-sm text-base leading-relaxed text-gray-700">
+          <p class="mb-6 max-w-sm text-base leading-relaxed text-slate-600">
             {card.description}
           </p>
 
-          <a
-            href={card.link}
-            class="rounded-full bg-emerald-600 px-7 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700"
-          >
-            Learn more
-          </a>
+          <Button href={card.link}>Learn more</Button>
         </article>
       ))
     }
   </div>
-</section>
+</Section>

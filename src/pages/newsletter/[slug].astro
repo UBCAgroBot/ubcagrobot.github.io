@@ -1,0 +1,128 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Section from "../../components/ui/Section.astro";
+import FallbackImage from "../../components/ui/FallbackImage.astro";
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection("newsletter");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, summary, publishDate, category, heroImage, author } = post.data;
+
+const formattedDate = publishDate.toLocaleDateString("en-CA", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Layout title={title} description={summary}>
+  <Section tone="tint">
+    <a
+      href="/newsletter"
+      class="text-brand-700 text-sm font-medium hover:underline"
+      >&larr; Back to newsletter</a
+    >
+    <div class="mt-6 max-w-3xl">
+      {
+        category && (
+          <span class="bg-brand-50 text-brand-800 w-fit rounded-full px-3 py-1 text-xs font-semibold tracking-wide uppercase">
+            {category}
+          </span>
+        )
+      }
+      <h1
+        class="mt-3 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl"
+      >
+        {title}
+      </h1>
+      <div class="mt-4 flex items-center gap-2 text-sm text-slate-500">
+        <time datetime={publishDate.toISOString()}>{formattedDate}</time>
+        {author && <span>&middot; {author}</span>}
+      </div>
+    </div>
+  </Section>
+
+  {
+    heroImage && (
+      <div class="mx-auto -mt-10 max-w-4xl px-6">
+        <FallbackImage
+          src={heroImage}
+          alt={`${title} cover image`}
+          class="aspect-16/9 w-full rounded-3xl"
+        />
+      </div>
+    )
+  }
+
+  <Section>
+    <article class="newsletter-content mx-auto max-w-3xl">
+      <Content />
+    </article>
+  </Section>
+</Layout>
+
+<style>
+  .newsletter-content :global(h2) {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-slate-900);
+  }
+
+  .newsletter-content :global(h3) {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-slate-900);
+  }
+
+  .newsletter-content :global(p) {
+    margin-bottom: 1.25rem;
+    color: var(--color-slate-700);
+  }
+
+  .newsletter-content :global(ul),
+  .newsletter-content :global(ol) {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+    color: var(--color-slate-700);
+  }
+
+  .newsletter-content :global(ul) {
+    list-style: disc;
+  }
+
+  .newsletter-content :global(ol) {
+    list-style: decimal;
+  }
+
+  .newsletter-content :global(a) {
+    color: var(--color-brand-700);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .newsletter-content :global(img) {
+    margin: 1.5rem 0;
+    border-radius: 1.5rem;
+  }
+
+  .newsletter-content :global(blockquote) {
+    margin: 1.5rem 0;
+    border-left: 3px solid var(--color-brand-300);
+    padding-left: 1.25rem;
+    font-style: italic;
+    color: var(--color-slate-600);
+  }
+</style>

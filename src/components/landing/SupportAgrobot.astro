@@ -1,44 +1,43 @@
-<section class="w-full bg-white px-6 py-20 md:px-16 lg:px-20">
-  <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:items-center">
+---
+import Section from "../ui/Section.astro";
+import Button from "../ui/Button.astro";
+import Card from "../ui/Card.astro";
+
+const points = [
+  "Provide resources for impactful student-led engineering projects",
+  "Enable the development of emerging engineering talent",
+  "Accelerate the future of sustainable agriculture",
+];
+---
+
+<Section>
+  <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
     <div>
       <h2
-        class="mb-8 text-4xl font-medium tracking-wide text-black md:text-5xl"
+        class="text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl"
       >
         Support Agrobot
       </h2>
 
-      <p class="mb-10 max-w-xl text-xl leading-snug text-black md:text-2xl">
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
         Sponsoring Agrobot provides students with the resources to design and
         build innovative agricultural robots while advancing hands-on
         engineering education and sustainable technology.
       </p>
 
-      <a
-        href="/sponsor"
-        class="inline-flex rounded-full bg-indigo-600 px-7 py-3 text-lg font-semibold text-white transition hover:bg-indigo-700"
-      >
-        Learn more
-      </a>
+      <div class="mt-8">
+        <Button href="/sponsor">Learn more</Button>
+      </div>
     </div>
 
-    <div class="flex flex-col gap-4 md:gap-5">
-      <div
-        class="rounded-[2rem] bg-neutral-100 px-8 py-8 text-xl leading-snug text-black md:px-12 md:text-2xl"
-      >
-        Provide resources for impactful student-led engineering projects
-      </div>
-
-      <div
-        class="rounded-[2rem] bg-neutral-100 px-8 py-8 text-xl leading-snug text-black md:px-12 md:text-2xl"
-      >
-        Enable the development of emerging engineering talent
-      </div>
-
-      <div
-        class="rounded-[2rem] bg-neutral-100 px-8 py-8 text-xl leading-snug text-black md:px-12 md:text-2xl"
-      >
-        Accelerate the future of sustainable agriculture
-      </div>
+    <div class="flex flex-col gap-4">
+      {
+        points.map((point) => (
+          <Card class="bg-slate-50 p-6 text-lg leading-snug text-slate-800 ring-0">
+            {point}
+          </Card>
+        ))
+      }
     </div>
   </div>
-</section>
+</Section>

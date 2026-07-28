@@ -1,73 +1,110 @@
-<footer class="w-full bg-[#f4f4f4] px-8 py-6 font-sans text-[#1a1a1a]">
-  <div
-    class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 md:flex-row md:items-end"
-  >
-    <div class="flex flex-col gap-4">
-      <div class="flex items-center gap-3">
-        <img src="/agrobot_logo.png" alt="UBC Agrobot Logo" class="h-8 w-8" />
-        <h2 class="text-xl font-medium text-gray-900">UBC Agrobot</h2>
+---
+const year = new Date().getFullYear();
+
+const navLinks = [
+  { label: "About", href: "/about" },
+  { label: "Projects", href: "/projects" },
+  { label: "Recruitment", href: "/recruitment" },
+  { label: "Sponsor Us", href: "/sponsor" },
+  { label: "Newsletter", href: "/newsletter" },
+  { label: "Contact", href: "/contact" },
+];
+---
+
+<footer class="w-full border-t border-slate-900/10 bg-slate-50">
+  <div class="mx-auto max-w-6xl px-6 py-12">
+    <div class="flex flex-col gap-10 md:flex-row md:justify-between">
+      <div class="flex flex-col gap-4">
+        <a
+          href="/"
+          class="inline-flex items-center gap-3"
+          aria-label="UBC Agrobot Home"
+        >
+          <img
+            src="/agrobot_logo.png"
+            alt="UBC Agrobot logo"
+            class="h-8 w-8 object-contain"
+          />
+          <span class="text-lg font-semibold text-slate-900">UBC Agrobot</span>
+        </a>
+
+        <p class="max-w-xs text-sm leading-relaxed text-slate-600">
+          A UBC student engineering team building autonomous robots and
+          agroponics systems for sustainable agriculture.
+        </p>
+
+        <div class="flex items-center gap-3">
+          <a
+            href="https://www.linkedin.com/company/ubcagrobot/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="UBC Agrobot on LinkedIn"
+            class="inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-200 hover:text-slate-900"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="h-5 w-5"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.06 2.06 0 1 1 0-4.122 2.06 2.06 0 0 1 0 4.122zM7.114 20.452H3.56V9h3.554v11.452z"
+              ></path>
+            </svg>
+          </a>
+          <a
+            href="https://instagram.com/ubcagrobot"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="UBC Agrobot on Instagram"
+            class="inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-200 hover:text-slate-900"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              class="h-5 w-5"
+              aria-hidden="true"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+        </div>
       </div>
 
-      <div class="flex items-center gap-3">
-        <!-- LinkedIn -->
-        <a
-          href="https://www.linkedin.com/company/ubc-agrobot/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="transition-opacity hover:opacity-80"
-        >
-          <svg
-            class="h-12 w-12"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M19 3H5C3.895 3 3 3.895 3 5V19C3 20.105 3.895 21 5 21H19C20.105 21 21 20.105 21 19V5C21 3.895 20.105 3 19 3Z"
-              fill="#006699"></path>
-            <path
-              d="M8.5 19V10H6V19H8.5ZM7.25 8.875C8.07843 8.875 8.75 8.20343 8.75 7.375C8.75 6.54657 8.07843 5.875 7.25 5.875C6.42157 5.875 5.75 6.54657 5.75 7.375C5.75 8.20343 6.42157 8.875 7.25 8.875Z"
-              fill="white"></path>
-            <path
-              d="M12.5 19V13.75C12.5 12.25 13 11.5 14.25 11.5C15.5 11.5 15.75 12.5 15.75 13.75V19H18.25V13.25C18.25 10.75 17 9.75 15.25 9.75C13.85 9.75 13 10.5 12.5 11.25V10H10V19H12.5Z"
-              fill="white"></path>
-          </svg>
-        </a>
-        <!-- Instagram -->
-        <a
-          href="https://instagram.com/ubcagrobot"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="transition-opacity hover:opacity-80"
-        >
-          <svg
-            class="h-10 w-10"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
-        </a>
-      </div>
+      <nav
+        aria-label="Footer"
+        class="grid grid-cols-2 gap-x-8 gap-y-2 sm:flex sm:flex-col"
+      >
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
 
-      <div class="footer-contact">
+      <div class="flex flex-col gap-2 text-sm text-slate-600">
+        <p class="font-semibold text-slate-900">Contact</p>
         <a
           href="mailto:ubcagrobot@gmail.com"
-          class="text-md underline transition-colors hover:text-black"
+          class="underline-offset-2 hover:text-slate-900 hover:underline"
         >
           ubcagrobot@gmail.com
         </a>
+        <p>Vancouver, BC, Canada</p>
       </div>
     </div>
 
-    <div class="text-md mt-4 md:mt-0 md:text-right">
-      <p>&copy; 2025 UBC Agrobot</p>
+    <div class="mt-10 border-t border-slate-900/10 pt-6 text-sm text-slate-500">
+      <p>&copy; {year} UBC Agrobot. All rights reserved.</p>
     </div>
   </div>
 </footer>

@@ -1,0 +1,55 @@
+---
+import type { CollectionEntry } from "astro:content";
+import FallbackImage from "../ui/FallbackImage.astro";
+
+interface Props {
+  post: CollectionEntry<"newsletter">;
+}
+
+const { post } = Astro.props;
+const { title, summary, publishDate, category, heroImage } = post.data;
+
+const formattedDate = publishDate.toLocaleDateString("en-CA", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<article
+  class="group flex flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-slate-900/5 transition hover:-translate-y-1 hover:shadow-lg"
+>
+  <a
+    href={`/newsletter/${post.id}`}
+    class="flex flex-1 flex-col focus:outline-none"
+  >
+    <FallbackImage
+      src={heroImage ?? ""}
+      alt={heroImage ? `${title} cover image` : ""}
+      class="aspect-16/10 w-full"
+    />
+    <div class="flex flex-1 flex-col gap-3 p-6">
+      {
+        category && (
+          <span class="bg-brand-50 text-brand-800 w-fit rounded-full px-3 py-1 text-xs font-semibold tracking-wide uppercase">
+            {category}
+          </span>
+        )
+      }
+      <h3
+        class="group-hover:text-brand-700 text-lg font-semibold text-slate-900"
+      >
+        {title}
+      </h3>
+      <p class="line-clamp-3 flex-1 text-sm leading-relaxed text-slate-600">
+        {summary}
+      </p>
+      <div
+        class="mt-2 flex items-center justify-between text-sm text-slate-500"
+      >
+        <time datetime={publishDate.toISOString()}>{formattedDate}</time>
+        <span class="text-brand-700 font-medium">Read more &rarr;</span>
+      </div>
+    </div>
+  </a>
+</article>

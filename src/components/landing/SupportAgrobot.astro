@@ -1,0 +1,43 @@
+---
+import Section from "../ui/Section.astro";
+import Button from "../ui/Button.astro";
+import Card from "../ui/Card.astro";
+
+const points = [
+  "Provide resources for impactful student-led engineering projects",
+  "Enable the development of emerging engineering talent",
+  "Accelerate the future of sustainable agriculture",
+];
+---
+
+<Section>
+  <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+    <div>
+      <h2
+        class="text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl"
+      >
+        Support Agrobot
+      </h2>
+
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
+        Sponsoring Agrobot provides students with the resources to design and
+        build innovative agricultural robots while advancing hands-on
+        engineering education and sustainable technology.
+      </p>
+
+      <div class="mt-8">
+        <Button href="/sponsor">Learn more</Button>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      {
+        points.map((point) => (
+          <Card class="bg-slate-50 p-6 text-lg leading-snug text-slate-800 ring-0">
+            {point}
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</Section>

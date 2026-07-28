@@ -1,0 +1,64 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Section from "../../components/ui/Section.astro";
+import SectionHeading from "../../components/ui/SectionHeading.astro";
+import NewsletterCard from "../../components/blocks/NewsletterCard.astro";
+
+const posts = (await getCollection("newsletter")).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
+---
+
+<Layout
+  title="Newsletter"
+  description="Build updates, competition recaps, and stories from the UBC Agrobot team."
+>
+  <Section tone="tint">
+    <SectionHeading
+      level="h1"
+      eyebrow="Newsletter"
+      title="Stories from the field and the workshop"
+      subtitle="Build updates, competition recaps, and behind-the-scenes stories from the UBC Agrobot team, in one place."
+    />
+  </Section>
+
+  <Section>
+    {
+      posts.length === 0 ? (
+        <div class="mx-auto max-w-xl rounded-3xl border border-dashed border-slate-300 bg-slate-50 px-8 py-16 text-center">
+          <h3 class="text-xl font-semibold text-slate-900">
+            No newsletters published yet
+          </h3>
+          <p class="mt-3 text-slate-600">
+            We're working on our first issue. In the meantime, follow us on{" "}
+            <a
+              href="https://instagram.com/ubcagrobot"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-brand-700 font-medium underline underline-offset-2"
+            >
+              Instagram
+            </a>{" "}
+            or{" "}
+            <a
+              href="https://www.linkedin.com/company/ubcagrobot/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-brand-700 font-medium underline underline-offset-2"
+            >
+              LinkedIn
+            </a>{" "}
+            for updates.
+          </p>
+        </div>
+      ) : (
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => (
+            <NewsletterCard post={post} />
+          ))}
+        </div>
+      )
+    }
+  </Section>
+</Layout>

@@ -1,19 +1,18 @@
-<!-- Section for getting involved with Agrobot -->
-<div class="flex flex-col items-center gap-10">
-  <!-- Main heading -->
-  <h1 class="text-5xl">Get Involved with Agrobot</h1>
+---
+import Section from "../ui/Section.astro";
+import Button from "../ui/Button.astro";
+---
 
-  <!-- Container for action buttons -->
-  <div class="flex flex-row gap-24">
-    <a
-      href="/recruitment"
-      class="rounded-full bg-gray-100 px-24 py-4 text-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:cursor-pointer hover:shadow-md"
-      >Join the team</a
+<Section>
+  <div class="flex flex-col items-center gap-8 text-center">
+    <h2
+      class="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl"
     >
-    <a
-      href="/sponsor"
-      class="rounded-full bg-gray-100 px-24 py-4 text-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:cursor-pointer hover:shadow-md"
-      >Sponsor us</a
-    >
+      Get involved with Agrobot
+    </h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <Button href="/recruitment" size="lg">Join the team</Button>
+      <Button href="/sponsor" variant="secondary" size="lg">Sponsor us</Button>
+    </div>
   </div>
-</div>
+</Section>

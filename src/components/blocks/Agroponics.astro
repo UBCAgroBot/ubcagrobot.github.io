@@ -1,25 +1,27 @@
-<!-- Agroponics Introduction Section -->
-<div class="flex flex-col gap-6">
-  <!-- Agroponics Image Container -->
-  <div class="h-[410px] max-w-[910px]">
+---
+import Section from "../ui/Section.astro";
+---
+
+<Section tone="tint">
+  <div class="grid items-center gap-12 lg:grid-cols-2">
     <img
       src="/hero-section-temp.jpg"
-      alt="Agrobot Project"
-      class="h-full w-full rounded-[3rem] object-cover"
+      alt="Agroponics hydroponic growing system prototype"
+      class="aspect-4/3 w-full rounded-3xl object-cover lg:order-2"
     />
-  </div>
 
-  <!-- Agroponics Text Content -->
-  <div class="flex flex-col gap-6">
-    <!-- Agroponics Section Heading -->
-    <h1 class="text-5xl">Introducing, Agroponics!</h1>
-
-    <!-- Agroponics Description -->
-    <p class="text-2xl">
-      Agroponics combines IoT automation, structural engineering, and plant
-      research to build optimized hydroponic environments. Through smart
-      monitoring and controlled nutrient delivery, the team reduces the amount
-      of resource consumption without compromising crop quality or yield.
-    </p>
+    <div class="flex flex-col gap-6 lg:order-1">
+      <h2
+        class="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl"
+      >
+        Introducing Agroponics
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-700">
+        Agroponics combines IoT automation, structural engineering, and plant
+        research to build optimized hydroponic environments. Through smart
+        monitoring and controlled nutrient delivery, the team reduces resource
+        consumption without compromising crop quality or yield.
+      </p>
+    </div>
   </div>
-</div>
+</Section>

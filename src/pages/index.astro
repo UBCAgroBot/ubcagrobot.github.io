@@ -1,22 +1,20 @@
 ---
-import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
 import LandingHero from "../components/content/LandingHero.astro";
-import MeetLeads from "../components/content/MeetLeads.astro";
 import RootsSection from "../components/landing/RootsSection.astro";
 import WhatWeBuild from "../components/landing/WhatWeBuild.astro";
-import PlantFutureSection from "../components/landing/PlantFuture.astro";
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import PlantFuture from "../components/landing/PlantFuture.astro";
+import SupportAgrobot from "../components/landing/SupportAgrobot.astro";
+import MeetLeads from "../components/content/MeetLeads.astro";
 ---
 
-<Layout>
-  <main class="pb-64">
-    <LandingHero />
-    <RootsSection />
-    <WhatWeBuild />
-    <PlantFutureSection />
-    <MeetLeads />
-  </main>
+<Layout
+  description="UBC Agrobot is a UBC student engineering team designing and building autonomous robots and agroponics systems for sustainable agriculture."
+>
+  <LandingHero />
+  <RootsSection />
+  <WhatWeBuild />
+  <PlantFuture />
+  <SupportAgrobot />
+  <MeetLeads />
 </Layout>

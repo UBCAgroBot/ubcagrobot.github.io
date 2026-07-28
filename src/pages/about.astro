@@ -5,12 +5,11 @@ import AboutWhoWeAre from "../components/blocks/AboutWhoWeAre.astro";
 import AboutWhatWeOffer from "../components/blocks/AboutWhatWeOffer.astro";
 ---
 
-<Layout>
-  <main class="flex min-h-screen w-full flex-col items-center gap-24 px-6 py-8">
-    <div class="mb-10 w-full max-w-7xl space-y-36">
-      <AboutOurStory />
-      <AboutWhoWeAre />
-      <AboutWhatWeOffer />
-    </div>
-  </main>
+<Layout
+  title="About"
+  description="Learn how UBC Agrobot started, who we are, and what we offer student engineers."
+>
+  <AboutOurStory />
+  <AboutWhoWeAre />
+  <AboutWhatWeOffer />
 </Layout>

@@ -1,4 +1,8 @@
 ---
+import Section from "../ui/Section.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import SubteamCard from "./SubteamCard.astro";
+
 interface Subteam {
   id: string;
   name: string;
@@ -14,6 +18,10 @@ interface TeamGroup {
   subteams: Subteam[];
 }
 
+interface Props {
+  teams?: TeamGroup[];
+}
+
 const {
   teams = [
     {
@@ -25,7 +33,7 @@ const {
           name: "Electrical",
           image: "/electrical.png",
           description:
-            "The Electrical Team plays a crucial role in AgroBot’s success by designing, assembling, and integrating its power systems. They create detailed electrical schematics, select high-quality components, and ensure efficient power management throughout the robot. The team rigorously tests and implements quality control measures to guarantee reliable performance in all conditions. Their work ensures that AgroBot’s electrical systems are robust, dependable, and capable of supporting its autonomous operations effectively.",
+            "The Electrical Team plays a crucial role in AgroBot's success by designing, assembling, and integrating its power systems. They create detailed electrical schematics, select high-quality components, and ensure efficient power management throughout the robot. The team rigorously tests and implements quality control measures to guarantee reliable performance in all conditions. Their work ensures that AgroBot's electrical systems are robust, dependable, and capable of supporting its autonomous operations effectively.",
           responsibilities: [],
           teamImage: "/electrical-team.jpg",
         },
@@ -34,7 +42,7 @@ const {
           name: "Applied AI",
           image: "/applied-ai.png",
           description:
-            "The Applied AI sub-team pioneers the development of machine learning models and AI to tackle a variety of AgroBot’s tasks, from plant identification to advanced machine vision. The team works on detecting maize and weeds, segmenting grape clusters, and integrating their models into the Robot Operating System (ROS) for real-world application. By exploring the intersection of AI research and emerging Agri-Tech, members continually push the boundaries of agricultural innovation. Their work ensures AgroBot can operate efficiently and accurately across diverse farming environments, making a tangible impact in sustainable agriculture.",
+            "The Applied AI sub-team pioneers the development of machine learning models and AI to tackle a variety of AgroBot's tasks, from plant identification to advanced machine vision. The team works on detecting maize and weeds, segmenting grape clusters, and integrating their models into the Robot Operating System (ROS) for real-world application. By exploring the intersection of AI research and emerging Agri-Tech, members continually push the boundaries of agricultural innovation. Their work ensures AgroBot can operate efficiently and accurately across diverse farming environments, making a tangible impact in sustainable agriculture.",
           responsibilities: [],
           teamImage: "/applied-ai-team.jpg",
         },
@@ -51,7 +59,7 @@ const {
           name: "Chassis/Power Train",
           image: "/chassis-powertrain.jpg",
           description:
-            "The Chassis/Powertrain sub-team designs and builds AgroBot’s chassis and powertrain, ensuring smooth mobility and seamless integration of all components. They carefully select motors and power transmission systems, perform finite element analysis to guarantee safety and durability, and develop detailed design solutions. The team also assembles components from other sub-teams onto AgroBot’s main body, creating a cohesive and fully functional robot. This sub-team is perfect for those interested in mechanical design, manufacturing, and bringing complex robotic systems to life.",
+            "The Chassis/Powertrain sub-team designs and builds AgroBot's chassis and powertrain, ensuring smooth mobility and seamless integration of all components. They carefully select motors and power transmission systems, perform finite element analysis to guarantee safety and durability, and develop detailed design solutions. The team also assembles components from other sub-teams onto AgroBot's main body, creating a cohesive and fully functional robot. This sub-team is perfect for those interested in mechanical design, manufacturing, and bringing complex robotic systems to life.",
           responsibilities: [],
           teamImage: "/chassis-powertrain-team.jpg",
         },
@@ -150,31 +158,38 @@ const {
       ],
     },
   ],
-} = Astro.props as { teams: TeamGroup[] };
-import SubteamCard from "./SubteamCard.astro";
+} = Astro.props;
 ---
 
-<div class="mx-auto bg-white px-4 py-16 text-center sm:px-6 sm:py-24 lg:px-8">
-  <h2 class="mb-8 text-3xl tracking-tight">Learn About Our Subteams</h2>
+<Section tone="tint">
+  <SectionHeading
+    title="Learn about our subteams"
+    align="center"
+    class="mx-auto"
+  />
 
-  {
-    teams.map((group) => (
-      <div class="mx-auto mb-12 w-fit rounded-3xl bg-gray-100 p-8">
-        <h2 class="mb-8 text-3xl tracking-tight">{group.name}</h2>
+  <div class="mt-12 flex flex-col gap-10">
+    {
+      teams.map((group) => (
+        <div class="rounded-3xl bg-white p-6 ring-1 ring-slate-900/5 sm:p-10">
+          <h3 class="mb-8 text-center text-2xl font-semibold text-slate-900">
+            {group.name}
+          </h3>
 
-        <div class="flex flex-wrap justify-center gap-8">
-          {group.subteams.map((team) => (
-            <SubteamCard
-              id={team.id}
-              name={team.name}
-              image={team.image}
-              description={team.description}
-              responsibilities={team.responsibilities}
-              teamImage={team.teamImage}
-            />
-          ))}
+          <div class="flex flex-wrap justify-center gap-8">
+            {group.subteams.map((team) => (
+              <SubteamCard
+                id={team.id}
+                name={team.name}
+                image={team.image}
+                description={team.description}
+                responsibilities={team.responsibilities}
+                teamImage={team.teamImage}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-    ))
-  }
-</div>
+      ))
+    }
+  </div>
+</Section>

@@ -1,0 +1,97 @@
+---
+import FallbackImage from "../ui/FallbackImage.astro";
+
+interface Props {
+  id: string;
+  name: string;
+  description: string;
+  responsibilities: string[];
+  teamImage: string;
+}
+
+const { id, name, description, responsibilities, teamImage } = Astro.props;
+const titleId = `${id}-title`;
+---
+
+<dialog
+  id={id}
+  aria-labelledby={titleId}
+  class="border-none bg-transparent p-0"
+>
+  <div
+    class="fixed inset-0 flex items-center justify-center bg-slate-950/60 p-4"
+  >
+    <button
+      type="button"
+      class="absolute inset-0"
+      aria-label={`Close ${name} details`}
+      onclick="this.closest('dialog').close()"></button>
+
+    <div
+      class="relative w-full max-w-2xl overflow-hidden rounded-[2rem] bg-white text-left shadow-xl"
+    >
+      <button
+        type="button"
+        onclick="this.closest('dialog').close()"
+        aria-label={`Close ${name} details`}
+        class="absolute top-4 right-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-slate-700 shadow-sm transition hover:bg-white"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          class="h-5 w-5"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18 18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <FallbackImage
+        src={teamImage}
+        alt={`${name} team`}
+        class="h-56 w-full sm:h-64"
+      />
+
+      <div class="p-8">
+        <h2
+          id={titleId}
+          class="text-2xl font-semibold text-slate-900 sm:text-3xl"
+        >
+          About {name}
+        </h2>
+
+        {
+          description ? (
+            <p class="mt-4 text-base leading-relaxed text-slate-600">
+              {description}
+            </p>
+          ) : (
+            <p class="mt-4 text-base leading-relaxed text-slate-500 italic">
+              More details about this subteam are coming soon.
+            </p>
+          )
+        }
+
+        {
+          responsibilities.length > 0 && (
+            <div class="mt-6">
+              <h3 class="text-sm font-semibold tracking-wide text-slate-900 uppercase">
+                Roles &amp; responsibilities
+              </h3>
+              <ul class="mt-3 ml-5 list-disc space-y-1 text-slate-600">
+                {responsibilities.map((r: string) => (
+                  <li>{r}</li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</dialog>

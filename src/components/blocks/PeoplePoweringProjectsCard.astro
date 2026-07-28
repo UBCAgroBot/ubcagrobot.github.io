@@ -1,10 +1,19 @@
 ---
+import Card from "../ui/Card.astro";
+
+interface Props {
+  quote: string;
+  author: string;
+}
+
 const { quote, author } = Astro.props;
 ---
 
-<div
-  class="flex flex-1 flex-col justify-between gap-8 rounded-3xl bg-gray-100 p-8"
->
-  <p class="text-xl leading-relaxed">"{quote}"</p>
-  <p class="text-lg">- {author}</p>
-</div>
+<Card as="figure" class="flex h-full flex-col justify-between gap-8 bg-white">
+  <blockquote class="text-lg leading-relaxed text-slate-700">
+    "{quote}"
+  </blockquote>
+  <figcaption class="text-base font-medium text-slate-500">
+    &mdash; {author}
+  </figcaption>
+</Card>

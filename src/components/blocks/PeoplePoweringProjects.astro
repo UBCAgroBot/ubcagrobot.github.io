@@ -1,12 +1,16 @@
 ---
+import Section from "../ui/Section.astro";
 import PeoplePoweringProjectsCard from "./PeoplePoweringProjectsCard.astro";
 ---
 
-<!-- Team Testimonials Section -->
-<div class="-mt-46 flex flex-col items-center gap-8 px-8 py-12">
-  <h1 class="text-center text-5xl">The people powering the Projects</h1>
+<Section tone="tint">
+  <h2
+    class="mb-10 text-center text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl"
+  >
+    The people powering the projects
+  </h2>
 
-  <div class="flex gap-12">
+  <div class="grid gap-6 md:grid-cols-3">
     <PeoplePoweringProjectsCard
       quote="I love how every challenge here turns into a learning experience. Seeing the robot actually move for the first time after weeks of testing was surreal."
       author="Jordan Lee, Mechanical Subteam"
@@ -20,4 +24,4 @@ import PeoplePoweringProjectsCard from "./PeoplePoweringProjectsCard.astro";
       author="Miguel Santos, Electrical Subteam"
     />
   </div>
-</div>
+</Section>

@@ -1,27 +1,31 @@
-<div class="flex h-full w-full flex-col gap-6">
-  <h1 class="text-5xl">Agrobot</h1>
+---
+import Section from "../ui/Section.astro";
+---
 
-  <div class="flex flex-row gap-8">
-    <div class="flex flex-col gap-7 text-2xl">
-      <p>
+<Section tone="tint">
+  <div class="grid items-center gap-12 lg:grid-cols-2">
+    <div class="flex flex-col gap-6">
+      <h2
+        class="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl"
+      >
+        Agrobot
+      </h2>
+      <p class="text-lg leading-relaxed text-slate-700">
         Agrobot is an autonomous agricultural robot designed to perform precise
         weeding and collect crop data in real time. With automation and machine
         vision, it helps growers make smarter, informed decisions.
       </p>
-      <p>
+      <p class="text-lg leading-relaxed text-slate-700">
         Behind Agrobot is a diverse team of engineers and designers working
         across hardware, software, and field testing. Their coordinated work
         ensures Agrobot is adaptable and ready to support real farming needs.
       </p>
     </div>
 
-    <!-- Project Image -->
-    <div class="max-w-[500px]">
-      <img
-        src="/hero-section-temp.jpg"
-        alt="Agrobot Project"
-        class="h-auto w-full rounded-[3rem] object-cover"
-      />
-    </div>
+    <img
+      src="/hero-section-temp.jpg"
+      alt="Close-up of the Agrobot robot chassis"
+      class="aspect-4/3 w-full rounded-3xl object-cover"
+    />
   </div>
-</div>
+</Section>

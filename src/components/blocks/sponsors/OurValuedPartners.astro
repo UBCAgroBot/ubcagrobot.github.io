@@ -1,15 +1,24 @@
-<div class="flex flex-col items-center gap-6">
-  <h1 class="text-5xl">Our Valued Partners</h1>
+---
+import Section from "../../ui/Section.astro";
+import SectionHeading from "../../ui/SectionHeading.astro";
 
-  <div class="grid grid-cols-5 gap-12 overflow-hidden">
-    <div class="size-[195px] rounded-[3rem] bg-gray-300"></div>
+// No sponsor logos have been provided yet -- these tiles hold the layout
+// until real partner logos are added.
+const partnerSlots = 5;
+---
 
-    <div class="size-[195px] rounded-[3rem] bg-gray-300"></div>
+<Section tone="tint">
+  <SectionHeading title="Our valued partners" align="center" class="mx-auto" />
 
-    <div class="size-[195px] rounded-[3rem] bg-gray-300"></div>
-
-    <div class="size-[195px] rounded-[3rem] bg-gray-300"></div>
-
-    <div class="size-[195px] rounded-[3rem] bg-gray-300"></div>
+  <div class="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
+    {
+      Array.from({ length: partnerSlots }).map(() => (
+        <div class="flex aspect-square items-center justify-center rounded-3xl bg-white ring-1 ring-slate-900/5">
+          <span class="text-xs font-medium text-slate-400">
+            Logo coming soon
+          </span>
+        </div>
+      ))
+    }
   </div>
-</div>
+</Section>

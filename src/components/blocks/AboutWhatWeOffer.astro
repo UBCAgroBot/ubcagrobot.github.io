@@ -1,42 +1,46 @@
-<div class="flex w-full flex-col items-center gap-12 px-6">
-  <div class="flex w-full max-w-5xl flex-col justify-center text-center">
-    <h1 class="text-5xl">What we offer</h1>
+---
+import Section from "../ui/Section.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
 
-    <p class="text-2xl leading-relaxed">
-      We provide a space where students can develop real robotics experience,
-      collaborate <br /> across disciplines, and work on meaningful projects that
-      support sustainable agriculture.
-    </p>
-  </div>
+const photos = [
+  {
+    src: "/what-we-offer-1.jpg",
+    alt: "Team members presenting project research in a lecture hall",
+  },
+  {
+    src: "/what-we-offer-2.jpg",
+    alt: "Team members assembling the robot chassis in the workshop",
+  },
+  {
+    src: "/what-we-offer-3.jpg",
+    alt: "Team members reviewing code together at a laptop",
+  },
+  {
+    src: "/what-we-offer-4.jpg",
+    alt: "A team member adjusting the robot's wheel assembly with a screwdriver",
+  },
+];
+---
 
-  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-    <div class="aspect-[3/4] overflow-hidden rounded-[3rem] bg-[#f4f4f4]">
-      <img
-        src="/what-we-offer-1.jpg"
-        alt="1"
-        class="h-full w-full object-cover"
-      />
-    </div>
-    <div class="aspect-[3/4] overflow-hidden rounded-[3rem] bg-[#f4f4f4]">
-      <img
-        src="/what-we-offer-2.jpg"
-        alt="1"
-        class="h-full w-full object-cover"
-      />
-    </div>
-    <div class="aspect-[3/4] overflow-hidden rounded-[3rem] bg-[#f4f4f4]">
-      <img
-        src="/what-we-offer-3.jpg"
-        alt="1"
-        class="h-full w-full object-cover"
-      />
-    </div>
-    <div class="aspect-[3/4] overflow-hidden rounded-[3rem] bg-[#f4f4f4]">
-      <img
-        src="/what-we-offer-4.jpg"
-        alt="1"
-        class="h-full w-full object-cover"
-      />
-    </div>
+<Section>
+  <SectionHeading
+    title="What we offer"
+    subtitle="We provide a space where students can develop real robotics experience, collaborate across disciplines, and work on meaningful projects that support sustainable agriculture."
+    align="center"
+    class="mx-auto"
+  />
+
+  <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      photos.map((photo) => (
+        <div class="aspect-3/4 overflow-hidden rounded-3xl bg-slate-100">
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            class="h-full w-full object-cover"
+          />
+        </div>
+      ))
+    }
   </div>
-</div>
+</Section>

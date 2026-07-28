@@ -10,39 +10,16 @@ import PeoplePoweringProjects from "../components/blocks/PeoplePoweringProjects.
 import GetInvolvedWithAgrobot from "../components/blocks/GetInvolvedWithAgrobot.astro";
 ---
 
-<Layout>
-  <main
-    class="flex min-h-screen w-full flex-col items-center gap-32 px-6 py-20"
-  >
-    <!-- Hero -->
-    <div class="mb-10 w-full max-w-7xl">
-      <AgrobotHero />
-    </div>
-
-    <!-- Body of the page -->
-    <div class="flex w-full max-w-4xl flex-col gap-24">
-      <ProjectsAgrobot />
-    </div>
-
-    <div class="w-full max-w-7xl">
-      <ProjectCloserLook />
-    </div>
-
-    <div class="flex w-full max-w-4xl flex-col gap-24">
-      <WhatsNextForAgrobot />
-      <Agroponics />
-    </div>
-
-    <div class="w-full max-w-6xl">
-      <BehindTheBuild />
-    </div>
-
-    <div class="w-full max-w-7xl gap-24">
-      <PeoplePoweringProjects />
-    </div>
-
-    <div class="flex w-full max-w-4xl flex-col gap-24">
-      <GetInvolvedWithAgrobot />
-    </div>
-  </main>
+<Layout
+  title="Projects"
+  description="Explore Agrobot and Agroponics, the autonomous robotics and hydroponics projects built by the UBC Agrobot team."
+>
+  <AgrobotHero />
+  <ProjectsAgrobot />
+  <ProjectCloserLook />
+  <WhatsNextForAgrobot />
+  <Agroponics />
+  <BehindTheBuild />
+  <PeoplePoweringProjects />
+  <GetInvolvedWithAgrobot />
 </Layout>

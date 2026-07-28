@@ -1,0 +1,31 @@
+---
+/*
+Standard vertical rhythm + background tone for a page section. Every page
+section should be wrapped in this so spacing stays consistent site-wide.
+*/
+import Container from "./Container.astro";
+
+interface Props {
+  tone?: "white" | "tint" | "brand";
+  wide?: boolean;
+  class?: string;
+  id?: string;
+}
+
+const { tone = "white", wide = false, class: className = "", id } = Astro.props;
+
+const toneClasses: Record<string, string> = {
+  white: "bg-white",
+  tint: "bg-slate-50",
+  brand: "bg-brand-900 text-white",
+};
+---
+
+<section
+  id={id}
+  class={`${toneClasses[tone]} py-16 sm:py-20 lg:py-24 ${className}`}
+>
+  <Container wide={wide}>
+    <slot />
+  </Container>
+</section>

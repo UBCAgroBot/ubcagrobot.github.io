@@ -15,10 +15,10 @@ const { id, name, icon, description, responsibilities, teamImage } =
   Astro.props;
 ---
 
-<div class="flex flex-col items-center">
+<div class="flex w-full flex-none flex-col items-center sm:w-[15rem]">
   <button
     type="button"
-    class="group flex flex-col items-center gap-2 rounded-2xl"
+    class="group flex w-full flex-col items-center gap-2 rounded-2xl"
     onclick={`document.getElementById('${id}').showModal()`}
   >
     <span

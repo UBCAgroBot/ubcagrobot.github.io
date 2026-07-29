@@ -1,17 +1,17 @@
 ---
 import TeamModal from "./TeamModal.astro";
-import FallbackImage from "../ui/FallbackImage.astro";
+import TeamIcon from "../icons/TeamIcon.astro";
 
 interface Props {
   id: string;
   name: string;
-  image: string;
+  icon: string;
   description: string;
   responsibilities: string[];
   teamImage: string;
 }
 
-const { id, name, image, description, responsibilities, teamImage } =
+const { id, name, icon, description, responsibilities, teamImage } =
   Astro.props;
 ---
 
@@ -21,11 +21,11 @@ const { id, name, image, description, responsibilities, teamImage } =
     class="group flex flex-col items-center gap-2 rounded-2xl"
     onclick={`document.getElementById('${id}').showModal()`}
   >
-    <FallbackImage
-      src={image}
-      alt={name}
-      class="h-24 w-24 rounded-2xl shadow-sm transition-transform group-hover:scale-105"
-    />
+    <span
+      class="flex h-24 w-24 items-center justify-center rounded-2xl bg-slate-50 text-blue-700 shadow-sm ring-1 ring-slate-200 transition-transform group-hover:scale-105"
+    >
+      <TeamIcon name={icon} class="h-11 w-11" />
+    </span>
     <p class="text-sm font-medium text-slate-800">{name}</p>
   </button>
 

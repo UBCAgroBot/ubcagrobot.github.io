@@ -1,7 +1,6 @@
 ---
 /*
 Dashboard mock shown on the right side of the landing hero.
-
 This simulates a robotics/computer vision interface so the page
 feels like a real product/engineering site instead of just text.
 */
@@ -13,9 +12,9 @@ feels like a real product/engineering site instead of just text.
     class="absolute -inset-6 -z-10 rounded-[28px] bg-white/70 ring-1 ring-slate-200/70 blur-xl"
   >
   </div>
-
   <!-- Main dashboard card -->
   <div
+    id="dashboard-card"
     class="overflow-hidden rounded-[28px] bg-white shadow-[0_24px_70px_-40px_rgba(2,6,23,0.45)] ring-1 ring-slate-200"
   >
     <!-- Fake window bar -->
@@ -27,7 +26,6 @@ feels like a real product/engineering site instead of just text.
         Agrobot Dashboard
       </span>
     </div>
-
     <div class="p-5">
       <!-- Mock camera / computer vision feed -->
       <div class="relative overflow-hidden rounded-2xl bg-slate-900">
@@ -37,7 +35,6 @@ feels like a real product/engineering site instead of just text.
           style="background: linear-gradient(180deg, #c7f9cc 0%, #95d5b2 38%, #40916c 38%, #2d6a4f 100%);"
         >
         </div>
-
         <!-- Crop rows -->
         <div
           class="absolute inset-x-0 top-[42%] bottom-0 flex justify-evenly opacity-70"
@@ -47,10 +44,10 @@ feels like a real product/engineering site instead of just text.
           <div class="bg-brand-200/40 h-full w-1"></div>
           <div class="bg-brand-200/40 h-full w-1"></div>
         </div>
-
         <!-- Detection box: crop -->
         <div
-          class="absolute top-[48%] left-[18%] h-16 w-14 rounded-md border-2 border-lime-300"
+          id="dashboard-box-crop"
+          class="absolute top-[48%] left-[18%] h-16 w-14 rounded-md border-2 border-lime-300 transition-transform duration-700 ease-out"
         >
           <span
             class="absolute -top-6 left-0 rounded bg-lime-300 px-2 py-0.5 text-[10px] font-semibold text-slate-900"
@@ -58,10 +55,10 @@ feels like a real product/engineering site instead of just text.
             crop
           </span>
         </div>
-
         <!-- Detection box: weed -->
         <div
-          class="border-brand-300 absolute top-[58%] left-[46%] h-12 w-12 rounded-md border-2"
+          id="dashboard-box-weed"
+          class="border-brand-300 absolute top-[58%] left-[46%] h-12 w-12 rounded-md border-2 transition-transform duration-700 ease-out"
         >
           <span
             class="bg-brand-300 absolute -top-6 left-0 rounded px-2 py-0.5 text-[10px] font-semibold text-slate-900"
@@ -69,10 +66,10 @@ feels like a real product/engineering site instead of just text.
             weed
           </span>
         </div>
-
         <!-- Detection box: row -->
         <div
-          class="absolute top-[52%] right-[18%] h-14 w-12 rounded-md border-2 border-sky-300"
+          id="dashboard-box-row"
+          class="absolute top-[52%] right-[18%] h-14 w-12 rounded-md border-2 border-sky-300 transition-transform duration-700 ease-out"
         >
           <span
             class="absolute -top-6 left-0 rounded bg-sky-300 px-2 py-0.5 text-[10px] font-semibold text-slate-900"
@@ -80,38 +77,58 @@ feels like a real product/engineering site instead of just text.
             row
           </span>
         </div>
-
+        <!-- Scanning line sweep, purely decorative -->
+        <div class="dashboard-scanline pointer-events-none absolute inset-x-0">
+        </div>
         <!-- Small status chip -->
         <div
-          class="absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm"
+          class="absolute top-4 left-4 flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm"
         >
+          <span class="relative flex h-1.5 w-1.5">
+            <span
+              class="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-400 opacity-75"
+            ></span>
+            <span
+              class="relative inline-flex h-1.5 w-1.5 rounded-full bg-lime-500"
+            ></span>
+          </span>
           Live vision
         </div>
       </div>
-
       <!-- Robot status cards -->
       <div class="mt-4 grid grid-cols-2 gap-3">
         <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
           <p class="text-xs font-medium text-slate-500">Mode</p>
           <p class="mt-1 text-sm font-semibold text-slate-900">Autonomous</p>
         </div>
-
         <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
           <p class="text-xs font-medium text-slate-500">Battery</p>
-          <p class="mt-1 text-sm font-semibold text-slate-900">92%</p>
+          <p
+            id="dashboard-battery"
+            class="mt-1 text-sm font-semibold text-slate-900"
+          >
+            92%
+          </p>
         </div>
-
         <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
           <p class="text-xs font-medium text-slate-500">Detected crops</p>
-          <p class="mt-1 text-sm font-semibold text-slate-900">67</p>
+          <p
+            id="dashboard-crops"
+            class="mt-1 text-sm font-semibold text-slate-900"
+          >
+            67
+          </p>
         </div>
-
         <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
           <p class="text-xs font-medium text-slate-500">Path status</p>
-          <p class="text-brand-700 mt-1 text-sm font-semibold">On track</p>
+          <p
+            id="dashboard-path-status"
+            class="text-brand-700 mt-1 text-sm font-semibold"
+          >
+            On track
+          </p>
         </div>
       </div>
-
       <!-- Bottom health/status row -->
       <div
         class="mt-4 flex items-center justify-between rounded-2xl bg-white px-4 py-3 ring-1 ring-slate-200"
@@ -120,14 +137,157 @@ feels like a real product/engineering site instead of just text.
           <p class="text-xs font-medium text-slate-500">System health</p>
           <p class="text-sm font-semibold text-slate-900">Nominal</p>
         </div>
-
         <div
           class="bg-brand-50 text-brand-700 flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold"
         >
-          <span class="bg-brand-500 h-2 w-2 rounded-full"></span>
+          <span class="relative flex h-2 w-2">
+            <span
+              class="bg-brand-400 absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
+            ></span>
+            <span class="bg-brand-500 relative inline-flex h-2 w-2 rounded-full"
+            ></span>
+          </span>
           Online
         </div>
       </div>
     </div>
   </div>
 </div>
+<style>
+  .dashboard-scanline {
+    top: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(190, 242, 100, 0.9),
+      transparent
+    );
+    box-shadow: 0 0 12px 1px rgba(190, 242, 100, 0.6);
+    animation: dashboardScan 3.2s linear infinite;
+  }
+  @keyframes dashboardScan {
+    0% {
+      top: 2%;
+      opacity: 0;
+    }
+    8% {
+      opacity: 1;
+    }
+    92% {
+      opacity: 1;
+    }
+    100% {
+      top: 98%;
+      opacity: 0;
+    }
+  }
+</style>
+<script>
+  (function () {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const card = document.getElementById("dashboard-card");
+    const batteryEl = document.getElementById("dashboard-battery");
+    const cropsEl = document.getElementById("dashboard-crops");
+    const pathStatusEl = document.getElementById("dashboard-path-status");
+    const boxes = [
+      document.getElementById("dashboard-box-crop"),
+      document.getElementById("dashboard-box-weed"),
+      document.getElementById("dashboard-box-row"),
+    ].filter((el): el is HTMLElement => el !== null);
+    if (prefersReducedMotion || !card || !batteryEl || !cropsEl) return;
+    const BATTERY_TARGET = 92;
+    const CROPS_TARGET = 67;
+    const COUNT_DURATION = 1200;
+    const BOX_JITTER_INTERVAL = 1100;
+    const STATS_NUDGE_INTERVAL = 1800;
+    const PATH_STATUS_INTERVAL = 4200;
+    const PATH_STATUSES = [
+      "Recalculating",
+      "Adjusting path",
+      "Path clear",
+      "Avoiding obstacle",
+      "Signal check",
+    ];
+    function countUp(
+      el: HTMLElement,
+      target: number,
+      suffix: string,
+      onDone: () => void,
+    ) {
+      const start = performance.now();
+      function tick(now: number) {
+        const progress = Math.min((now - start) / COUNT_DURATION, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = `${Math.round(target * eased)}${suffix}`;
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          el.textContent = `${target}${suffix}`;
+          onDone();
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+    function jitterBoxes() {
+      boxes.forEach((box) => {
+        const dx = (Math.random() - 0.5) * 26;
+        const dy = (Math.random() - 0.5) * 22;
+        const scale = 0.9 + Math.random() * 0.2;
+        box.style.transform = `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) scale(${scale.toFixed(2)})`;
+        box.style.opacity = (0.75 + Math.random() * 0.25).toFixed(2);
+      });
+    }
+    function nudgeStats() {
+      const batteryDelta = Math.random() < 0.5 ? -1 : 1;
+      const currentBattery =
+        parseInt(batteryEl!.textContent || "", 10) || BATTERY_TARGET;
+      const nextBattery = Math.min(
+        100,
+        Math.max(85, currentBattery + batteryDelta),
+      );
+      batteryEl!.textContent = `${nextBattery}%`;
+      const cropsDelta = Math.floor(Math.random() * 3) - 1;
+      const currentCrops =
+        parseInt(cropsEl!.textContent || "", 10) || CROPS_TARGET;
+      const nextCrops = Math.max(0, currentCrops + cropsDelta);
+      cropsEl!.textContent = `${nextCrops}`;
+    }
+    function flashPathStatus() {
+      if (!pathStatusEl) return;
+      const original = pathStatusEl.textContent;
+      const next =
+        PATH_STATUSES[Math.floor(Math.random() * PATH_STATUSES.length)];
+      pathStatusEl.textContent = next;
+      setTimeout(() => {
+        pathStatusEl.textContent = original;
+      }, 1000);
+    }
+    function startLiveOverlay() {
+      setInterval(jitterBoxes, BOX_JITTER_INTERVAL);
+      setInterval(nudgeStats, STATS_NUDGE_INTERVAL);
+      setInterval(flashPathStatus, PATH_STATUS_INTERVAL);
+    }
+    batteryEl.textContent = "0%";
+    cropsEl.textContent = "0";
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          let remaining = 2;
+          const onCountDone = () => {
+            remaining -= 1;
+            if (remaining === 0) startLiveOverlay();
+          };
+          countUp(batteryEl!, BATTERY_TARGET, "%", onCountDone);
+          countUp(cropsEl!, CROPS_TARGET, "", onCountDone);
+          obs.disconnect();
+        });
+      },
+      { threshold: 0.4 },
+    );
+    observer.observe(card);
+  })();
+</script>

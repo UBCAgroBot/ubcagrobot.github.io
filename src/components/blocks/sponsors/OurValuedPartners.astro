@@ -2,23 +2,157 @@
 import Section from "../../ui/Section.astro";
 import SectionHeading from "../../ui/SectionHeading.astro";
 
-// No sponsor logos have been provided yet -- these tiles hold the layout
-// until real partner logos are added.
-const partnerSlots = 5;
+import downloadImage from "../../../assets/images/our-valued-partners/download.jpeg";
+import downloadOneImage from "../../../assets/images/our-valued-partners/download (1).jpeg";
+import downloadPngImage from "../../../assets/images/our-valued-partners/download.png";
+import eceImage from "../../../assets/images/our-valued-partners/ece.e762fd9aeb1b72a37a4f.jpg";
+import gageImage from "../../../assets/images/our-valued-partners/gage.1bcb2f5fc05f9dc63422.png";
+import ieeeImage from "../../../assets/images/our-valued-partners/ieee.dd75d1381824654fbd0d.png";
+
+const partners = [
+  { image: downloadImage, alt: "Partner logo" },
+  { image: downloadOneImage, alt: "Partner logo" },
+  { image: downloadPngImage, alt: "Partner logo" },
+  { image: eceImage, alt: "UBC Electrical and Computer Engineering logo" },
+  { image: gageImage, alt: "GAGE logo" },
+  { image: ieeeImage, alt: "IEEE logo" },
+];
+
+const scrollingPartners = [...partners, ...partners];
 ---
 
 <Section tone="tint">
   <SectionHeading title="Our valued partners" align="center" class="mx-auto" />
 
-  <div class="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
-    {
-      Array.from({ length: partnerSlots }).map(() => (
-        <div class="flex aspect-square items-center justify-center rounded-3xl bg-white ring-1 ring-slate-900/5">
-          <span class="text-xs font-medium text-slate-400">
-            Logo coming soon
-          </span>
-        </div>
-      ))
-    }
+  <div class="relative mt-10">
+    <div
+      id="our-valued-partners-carousel"
+      class="no-scrollbar -mt-2 flex cursor-grab gap-6 overflow-x-auto px-2 pt-2 pb-4 active:cursor-grabbing"
+    >
+      {
+        scrollingPartners.map(({ image, alt }, index) => (
+          <div
+            class="flex aspect-square w-52 shrink-0 items-center justify-center rounded-3xl bg-white p-8 ring-1 ring-slate-900/5 sm:w-60"
+            aria-hidden={index >= partners.length ? "true" : undefined}
+          >
+            <img
+              src={image.src}
+              alt={index >= partners.length ? "" : alt}
+              class="max-h-full max-w-full object-contain"
+            />
+          </div>
+        ))
+      }
+    </div>
+
+    <div
+      class="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-50 to-transparent"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-50 to-transparent"
+    >
+    </div>
   </div>
 </Section>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<script>
+  const carousel = document.getElementById("our-valued-partners-carousel");
+
+  if (carousel) {
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let autoScrollPausedUntil = 0;
+
+    const pauseAutoScroll = (ms = 800) => {
+      autoScrollPausedUntil = Date.now() + ms;
+    };
+
+    const getLoopPoint = () => carousel.scrollWidth / 2;
+
+    const normalizeScroll = () => {
+      const loopPoint = getLoopPoint();
+
+      if (carousel.scrollLeft >= loopPoint) {
+        carousel.scrollLeft -= loopPoint;
+      } else if (carousel.scrollLeft < 0) {
+        carousel.scrollLeft += loopPoint;
+      }
+    };
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    const autoScroll = () => {
+      if (!isDown && Date.now() >= autoScrollPausedUntil) {
+        carousel.scrollLeft += 0.35;
+        normalizeScroll();
+      }
+
+      requestAnimationFrame(autoScroll);
+    };
+
+    if (!reduceMotion) {
+      requestAnimationFrame(autoScroll);
+    }
+
+    carousel.addEventListener("mousedown", (event) => {
+      isDown = true;
+      startX = event.pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft;
+    });
+
+    carousel.addEventListener("mouseleave", () => {
+      if (isDown) {
+        isDown = false;
+        pauseAutoScroll(600);
+        normalizeScroll();
+      }
+    });
+
+    carousel.addEventListener("mouseup", () => {
+      if (isDown) {
+        isDown = false;
+        pauseAutoScroll(600);
+        normalizeScroll();
+      }
+    });
+
+    carousel.addEventListener("mousemove", (event) => {
+      if (!isDown) return;
+      event.preventDefault();
+
+      const x = event.pageX - carousel.offsetLeft;
+      carousel.scrollLeft = scrollLeft - (x - startX) * 1.2;
+      normalizeScroll();
+    });
+
+    carousel.addEventListener("touchstart", () => pauseAutoScroll(800), {
+      passive: true,
+    });
+
+    carousel.addEventListener("touchmove", normalizeScroll, { passive: true });
+
+    carousel.addEventListener(
+      "wheel",
+      () => {
+        pauseAutoScroll(500);
+        requestAnimationFrame(normalizeScroll);
+      },
+      { passive: true },
+    );
+  }
+</script>

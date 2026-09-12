@@ -6,8 +6,10 @@ interface Props {
 
 const {
   title = "Join our team",
-  subtitle = "Applications will open next in August 2027",
+  subtitle = "Applications are open right now!",
 } = Astro.props;
+const applicationUrl =
+  "https://docs.google.com/forms/d/e/1FAIpQLSe8e8fSpGi4zjgt4dQtpgwgpeIF6I8e-85_scdc6rLb6sUBGA/viewform?usp=publish-editor";
 ---
 
 <section
@@ -24,5 +26,14 @@ const {
     <p class="mt-5 text-xl text-slate-100 sm:text-2xl">
       {subtitle}
     </p>
+
+    <a
+      href={applicationUrl}
+      target="_blank"
+      rel="noreferrer"
+      class="mt-6 inline-block rounded-full bg-emerald-500 px-6 py-3 text-base font-semibold text-white transition hover:bg-emerald-400 focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-slate-950 focus:outline-none sm:text-lg"
+    >
+      Apply now
+    </a>
   </div>
 </section>
